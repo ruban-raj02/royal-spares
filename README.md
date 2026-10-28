@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RoyalSpares
+
+RoyalSpares is an online store project focused on helping customers browse Royal Enfield motorcycle spare parts.
+
+## Features
+
+- Browse spare parts by category and motorcycle model.
+- View product details and related information.
+- Navigate dedicated pages for bikes, categories, and spare parts.
+- Responsive interface for desktop and mobile devices.
+- Reusable UI components and shared utilities.
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- CSS
+- npm
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js
+- npm
+
+### Installation
+
+Install the project dependencies:
+
+```bash
+npm install
+```
+
+### Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev
+npm run build
+npm run start
+```
 
-## Learn More
+Check `package.json` for the available scripts.
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+royalspares/
+├── public/
+│   └── images/
+├── src/
+│   ├── app/
+│   │   ├── bikes/
+│   │   ├── categories/
+│   │   └── parts/
+│   ├── components/
+│   └── lib/
+├── components.json
+├── package.json
+├── package-lock.json
+└── README.md
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Development
 
-## Deploy on Vercel
+1. Add application pages inside `src/app/`.
+2. Create reusable components inside `src/components/`.
+3. Store shared utilities inside `src/lib/`.
+4. Store public assets inside `public/`.
+5. Test changes locally before deployment.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Environment Variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+If environment variables are required, add them to `.env.local`. Never commit secrets or API keys to Git.
+
+## Production Build
+
+```bash
+npm run build
+npm run start
+```
+
+## License
+
+A license has not yet been specified.
