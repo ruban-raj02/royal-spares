@@ -15,13 +15,10 @@ export function MicroficheSchematic({ part }: { part: Part }) {
       {/* Header */}
       <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between border-b border-line pb-5">
         <div>
-          <p className="mono-spec text-[11px] text-heritage font-semibold">
-            Technical Engineering Microfiche
-          </p>
-          <h2 className="text-[20px] md:text-[24px] font-bold tracking-tight text-ink mt-0.5">
+          <h2 className="text-[20px] md:text-[24px] font-bold tracking-tight text-ink">
             Exploded Microfiche &amp; Torque Specs
           </h2>
-          <p className="text-[13px] text-mute font-mono mt-1">
+          <p className="text-[13px] text-mute mt-1">
             {microfiche.diagramCode} · {microfiche.diagramSub}
           </p>
         </div>
@@ -53,13 +50,13 @@ export function MicroficheSchematic({ part }: { part: Part }) {
             />
 
             {/* Top Blueprint Details */}
-            <div className="absolute top-3 left-4 flex items-center gap-3 font-mono text-[10px] text-mute">
+            <div className="absolute top-3 left-4 flex items-center gap-3 text-[11px] text-mute">
               <span className="font-semibold text-ink/70">J1D-DRIVE-FIG-14</span>
-              <span>• TOLERANCE: ±0.015mm</span>
-              <span className="hidden sm:inline">• CAD REV: 4.1</span>
+              <span>• Tolerance: ±0.015mm</span>
+              <span className="hidden sm:inline">• CAD Rev: 4.1</span>
             </div>
 
-            <div className="absolute top-3 right-4 flex items-center gap-1.5 font-mono text-[10px] text-mute bg-well px-2 py-0.5 rounded border border-line">
+            <div className="absolute top-3 right-4 flex items-center gap-1.5 text-[11px] text-mute bg-well px-2 py-0.5 rounded border border-line">
               <Maximize2 className="size-3" />
               <span>{microfiche.scale}</span>
             </div>
@@ -172,7 +169,7 @@ export function MicroficheSchematic({ part }: { part: Part }) {
                 textAnchor="middle"
                 fontSize="11"
                 fill="#6b7280"
-                fontFamily="var(--font-jetbrains)"
+                fontFamily="var(--font-manrope)"
               >
                 WHEELBASE DRIVELINE: 1,390mm
               </text>
@@ -186,7 +183,7 @@ export function MicroficheSchematic({ part }: { part: Part }) {
                   key={spot.id}
                   onClick={() => setSelectedHotspot(spot.id)}
                   style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
-                  className={`absolute -translate-x-1/2 -translate-y-1/2 group z-20 flex size-7 items-center justify-center rounded-full font-mono text-[12px] font-bold transition-all shadow-md ${
+                  className={`absolute -translate-x-1/2 -translate-y-1/2 group z-20 flex size-7 items-center justify-center rounded-full text-[12px] font-bold transition-all shadow-md ${
                     isSelected
                       ? "bg-heritage text-white ring-4 ring-heritage/30 scale-110"
                       : "bg-white text-ink border border-line hover:border-ink hover:scale-105"
@@ -202,16 +199,16 @@ export function MicroficheSchematic({ part }: { part: Part }) {
           {/* Active Hotspot Inspector Card */}
           <div className="flex items-center justify-between rounded-card border border-heritage/30 bg-heritage/5 p-3.5">
             <div className="flex items-center gap-3">
-              <span className="grid size-8 place-items-center rounded-full bg-heritage font-mono text-[13px] font-bold text-white shrink-0">
+              <span className="grid size-8 place-items-center rounded-full bg-heritage text-[13px] font-bold text-white shrink-0">
                 {currentHotspot.id}
               </span>
               <div>
                 <h4 className="text-[13px] font-semibold text-ink">{currentHotspot.label}</h4>
-                <p className="text-[12px] text-mute font-mono">{currentHotspot.spec}</p>
+                <p className="text-[12px] text-mute">{currentHotspot.spec}</p>
               </div>
             </div>
-            <span className="text-[11px] font-mono text-heritage font-medium bg-canvas px-2.5 py-1 rounded border border-heritage/20">
-              ACTIVE COMPONENT
+            <span className="text-[11px] text-heritage font-medium bg-canvas px-2.5 py-1 rounded border border-heritage/20">
+              Selected component
             </span>
           </div>
         </div>
@@ -237,11 +234,11 @@ export function MicroficheSchematic({ part }: { part: Part }) {
                   <div className="flex items-start justify-between gap-2">
                     <span className="text-[13px] font-medium text-ink">{item.component}</span>
                     <div className="text-right shrink-0">
-                      <span className="font-mono text-[14px] font-bold text-ink">{item.metric}</span>
-                      <span className="block font-mono text-[10px] text-mute">({item.imperial})</span>
+                      <span className="text-[14px] font-bold text-ink">{item.metric}</span>
+                      <span className="block text-[11px] text-mute">({item.imperial})</span>
                     </div>
                   </div>
-                  <p className="mt-1 text-[11px] text-mute font-mono">{item.note}</p>
+                  <p className="mt-1 text-[11px] text-mute">{item.note}</p>
                 </div>
               ))}
             </div>

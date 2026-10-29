@@ -127,6 +127,9 @@
   html {
     @apply font-sans;
   }
+  .font-mono, .mono-spec, .part-ref {
+    font-weight: 600;
+  }
 }
 
 
@@ -142,7 +145,7 @@
   --color-stock: #248a3d;
   --color-danger: #d70015;
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  --font-mono: var(--font-manrope), ui-monospace, SFMono-Regular, monospace;
   --radius-control: 12px;
   --radius-card: 16px;
   --radius-panel: 20px;
@@ -172,7 +175,7 @@ body {
   .h-section { font-size: 28px; line-height: 36px; font-weight: 600; letter-spacing: -0.015em; }
   @media (max-width: 767px) { .h-section { font-size: 22px; line-height: 28px; } }
 
-  .mono-spec { font-family: var(--font-mono); font-size: 11px; line-height: 16px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-mute); }
+  .mono-spec { font-family: var(--font-mono); font-size: 11px; line-height: 16px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-mute); }
   .part-ref { font-family: var(--font-mono); font-size: 11px; background: var(--color-well); color: var(--color-ink); border-radius: 4px; padding: 2px 6px; }
 
   .card { background: var(--color-canvas); border: 1px solid var(--color-line); border-radius: var(--radius-card); transition: border-color .15s, box-shadow .15s; }

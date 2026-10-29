@@ -108,7 +108,7 @@ export function ProductBuyBox({ part }: { part: Part }) {
         </button>
 
         <div className="inline-flex items-center gap-1.5 text-[12px] font-medium text-stock">
-          <span className="size-2 rounded-full bg-stock animate-pulse" />
+          <span className="size-2 rounded-full bg-stock" />
           <span>
             {part.stockUnits} in stock ({part.stock})
           </span>
@@ -136,7 +136,7 @@ export function ProductBuyBox({ part }: { part: Part }) {
             <span className="text-[13px] font-semibold text-ink">
               {isMatch ? "Guaranteed Fitment" : "Fitment Warning"}
             </span>
-            <span className="text-mute font-mono text-[11px] hidden sm:inline">
+            <span className="text-mute text-[12px] hidden sm:inline">
               · Pre-matched to garage bike
             </span>
           </div>
@@ -151,14 +151,14 @@ export function ProductBuyBox({ part }: { part: Part }) {
         <div className="mt-2.5 flex items-center justify-between rounded-control border border-line/60 bg-canvas p-2.5">
           <div className="min-w-0 pr-2">
             <p className="truncate text-[13px] font-medium text-ink">{activeBike}</p>
-            <p className="truncate text-[11px] text-mute font-mono mt-0.5">{matchNotes}</p>
+            <p className="truncate text-[12px] text-mute mt-0.5">{matchNotes}</p>
           </div>
           <span
-            className={`shrink-0 rounded px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider uppercase ${
+            className={`shrink-0 rounded px-2 py-0.5 text-[11px] font-semibold ${
               isMatch ? "bg-stock/15 text-stock" : "bg-danger/15 text-danger"
             }`}
           >
-            {isMatch ? "100% MATCH" : "NO MATCH"}
+            {isMatch ? "100% Match" : "No Match"}
           </span>
         </div>
       </div>
@@ -167,14 +167,14 @@ export function ProductBuyBox({ part }: { part: Part }) {
       <div className="border-y border-line py-3">
         <div className="flex items-baseline gap-3">
           <span className="text-[32px] font-bold tracking-tight text-ink">{inr(part.price)}</span>
-          <span className="font-mono text-[16px] text-mute line-through">{inr(part.mrp)}</span>
+          <span className="text-[16px] text-mute line-through">{inr(part.mrp)}</span>
           <span className="rounded-full bg-stock/15 px-2.5 py-0.5 text-[12px] font-semibold text-stock">
             Save {inr(part.saveAmount)} ({part.discountPct}%)
           </span>
         </div>
         <p className="mt-1 text-[12px] text-mute leading-5">
           {part.taxNote}{" "}
-          <span className="font-mono text-[11px] text-mute/80">(Incl. 18% GST: ₹{part.gstAmount})</span>
+          <span className="text-[12px] text-mute/80">(Incl. 18% GST: ₹{part.gstAmount})</span>
         </p>
       </div>
 
@@ -190,7 +190,7 @@ export function ProductBuyBox({ part }: { part: Part }) {
             >
               <Minus className="size-4" />
             </button>
-            <span className="w-8 text-center font-mono text-[15px] font-semibold">{qty}</span>
+            <span className="w-8 text-center text-[15px] font-semibold">{qty}</span>
             <button
               onClick={() => setQty((q) => q + 1)}
               className="grid size-8 place-items-center rounded hover:bg-well text-mute hover:text-ink transition-colors"
@@ -249,8 +249,8 @@ export function ProductBuyBox({ part }: { part: Part }) {
             <MapPin className="size-3.5 text-heritage" />
             <span>Estimated Delivery &amp; Pincode</span>
           </span>
-          <span className="rounded bg-stock/15 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-stock uppercase">
-            FREE SHIPPING
+          <span className="rounded bg-stock/15 px-2 py-0.5 text-[11px] font-medium text-stock">
+            Free Shipping
           </span>
         </div>
 
@@ -262,7 +262,7 @@ export function ProductBuyBox({ part }: { part: Part }) {
               maxLength={6}
               onChange={(e) => setPincode(e.target.value.replace(/\D/g, ""))}
               placeholder="Enter 6-digit PIN code"
-              className="field h-9 text-[13px] font-mono pl-3 pr-8"
+              className="field h-9 text-[13px] pl-3 pr-8"
             />
           </div>
           <button
@@ -283,8 +283,8 @@ export function ProductBuyBox({ part }: { part: Part }) {
             <p className="text-mute text-[11px] mt-0.5">
               {pinStatus.sla} via <span className="font-medium text-ink">{pinStatus.courier}</span>
             </p>
-            <p className="text-[11px] text-heritage font-mono mt-1">
-              Order within 2h 42m for guaranteed dispatch on tonight&apos;s air transit
+            <p className="text-[11px] text-heritage mt-1">
+              Order within 2h 42m for dispatch on tonight&apos;s air transit
             </p>
           </div>
         </div>

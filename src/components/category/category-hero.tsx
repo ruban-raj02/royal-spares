@@ -40,13 +40,13 @@ export function CategoryHero({
 
   return (
     <section className="mb-6 md:mb-8 space-y-4">
-      {/* 1. Top Telemetry Bar (Desktop & Tablet) */}
-      <div className="hidden md:flex items-center justify-between border-b border-line/70 pb-3 font-mono text-[11px] text-mute">
+      {/* 1. Top Inventory Status Bar (Desktop & Tablet) */}
+      <div className="hidden md:flex items-center justify-between border-b border-line/70 pb-3 text-[12px] text-mute">
         <div className="flex items-center gap-2">
-          <span className="size-2 rounded-full bg-stock animate-pulse" />
-          <span className="font-semibold text-ink">LIVE CENTRAL INVENTORY DEPOT</span>
+          <span className="size-2 rounded-full bg-stock" />
+          <span className="font-semibold text-ink">Central Inventory Depot</span>
           <span>•</span>
-          <span>CHENNAI HUB (ZONE A)</span>
+          <span>Chennai Hub (Zone A)</span>
         </div>
         <div className="flex items-center gap-3">
           <span>Sync: 14:02:18 IST</span>
@@ -57,7 +57,7 @@ export function CategoryHero({
 
       {/* 2. Breadcrumbs (Desktop & Tablet) */}
       <nav aria-label="Breadcrumb" className="hidden md:block">
-        <ol className="flex items-center gap-1.5 font-mono text-[11px] text-mute">
+        <ol className="flex items-center gap-1.5 text-[12px] text-mute">
           <li>
             <Link href="/" className="hover:text-ink transition-colors">
               Catalogue
@@ -81,16 +81,16 @@ export function CategoryHero({
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           <div className="space-y-2 max-w-3xl">
-            {/* Eyebrow Badges */}
+            {/* Metadata Tags */}
             <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded bg-well border border-line px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-mute uppercase">
+              <span className="rounded bg-well border border-line px-2 py-0.5 text-[11px] font-medium text-mute">
                 {category.eyebrow}
               </span>
-              <span className="font-mono text-[10px] text-mute/80 hidden sm:inline">
+              <span className="text-[11px] text-mute hidden sm:inline">
                 {category.standards}
               </span>
               {/* Mobile badge */}
-              <span className="md:hidden rounded-full bg-stock/10 border border-stock/20 px-2 py-0.5 font-mono text-[10px] font-semibold text-stock">
+              <span className="md:hidden rounded-full bg-stock/10 border border-stock/20 px-2 py-0.5 text-[11px] font-medium text-stock">
                 {category.partsCount} OEM Parts
               </span>
             </div>
@@ -107,14 +107,14 @@ export function CategoryHero({
           {/* Quality & Tolerance Specs (Desktop Right Side) */}
           <div className="hidden lg:flex items-center gap-3 shrink-0">
             <div className="rounded-card border border-line bg-well/50 p-3 text-center min-w-[110px]">
-              <span className="mono-spec text-[9px] block">SAFETY TESTED</span>
+              <span className="text-[11px] font-medium text-mute block">Safety Tested</span>
               <span className="font-bold text-[16px] text-ink block mt-0.5">
                 {category.safetyTested}
               </span>
             </div>
             <div className="rounded-card border border-line bg-well/50 p-3 text-center min-w-[110px]">
-              <span className="mono-spec text-[9px] block">TOLERANCE</span>
-              <span className="font-mono font-bold text-[16px] text-ink block mt-0.5">
+              <span className="text-[11px] font-medium text-mute block">Tolerance</span>
+              <span className="font-bold text-[16px] text-ink block mt-0.5">
                 {category.tolerance}
               </span>
             </div>
@@ -146,18 +146,18 @@ export function CategoryHero({
           </div>
         </div>
 
-        {/* 5. Motorcycle Calibration & Compatibility Filter Bar */}
+        {/* 5. Motorcycle Compatibility Filter Bar */}
         <div className="mt-4 rounded-control border border-line/80 bg-well/60 p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-[12px]">
           <div className="flex items-center gap-2.5">
             <div className="size-7 rounded-md bg-canvas border border-line grid place-items-center text-heritage shrink-0">
               <Bike className="size-4" />
             </div>
             <div>
-              <span className="font-mono text-[10px] text-mute uppercase tracking-wider block">
-                MOTORCYCLE CALIBRATION PROFILE
+              <span className="text-[11px] text-mute block font-medium">
+                Compatibility Profile
               </span>
               <span className="font-medium text-ink">
-                Bike Compatibility: Showing parts for{" "}
+                Showing parts for{" "}
                 <b className="font-semibold text-heritage">
                   {selectedBikeFilter === "all" ? "All RE Models" : selectedBikeFilter}
                 </b>
@@ -171,7 +171,7 @@ export function CategoryHero({
               <select
                 value={selectedBikeFilter}
                 onChange={(e) => onSelectBikeFilter(e.target.value)}
-                className="field h-8 appearance-none truncate pr-7 pl-2.5 text-[11px] font-mono rounded-md bg-canvas border border-line cursor-pointer"
+                className="field h-8 appearance-none truncate pr-7 pl-2.5 text-[12px] rounded-md bg-canvas border border-line cursor-pointer"
               >
                 <option value="all">All RE Models</option>
                 <option value="Classic 350 (J-Series)">Classic 350 (J-Series)</option>
@@ -186,7 +186,7 @@ export function CategoryHero({
             {/* Garage sync badge */}
             <button
               onClick={() => setIsBikeModalOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-md border border-line bg-canvas px-2.5 py-1 text-[11px] font-mono font-medium text-ink hover:border-ink cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-md border border-line bg-canvas px-2.5 py-1 text-[12px] font-medium text-ink hover:border-ink cursor-pointer"
             >
               <span className="size-1.5 rounded-full bg-stock" />
               <span>KA-01-MJ-4520</span>

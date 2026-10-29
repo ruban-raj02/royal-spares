@@ -26,9 +26,9 @@ export function CategoryVinBanner({ category }: { category: CategoryDetail }) {
       <div className="hidden md:block rounded-panel border border-heritage/40 bg-gradient-to-r from-[#172c23] to-[#0f1d17] p-6 lg:p-8 text-white shadow-md">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           <div className="lg:col-span-7 space-y-2">
-            <span className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest flex items-center gap-1.5 font-bold">
+            <span className="text-[11px] text-emerald-400 flex items-center gap-1.5 font-medium">
               <ShieldCheck className="size-3.5 text-emerald-400" />
-              ZERO-DISPUTE FITMENT POLICY
+              Fitment Guarantee
             </span>
             <h3 className="text-[18px] lg:text-[22px] font-bold text-white tracking-tight">
               {category.vinNotice.heading}
@@ -58,7 +58,7 @@ export function CategoryVinBanner({ category }: { category: CategoryDetail }) {
             </form>
 
             {status && (
-              <div className="mt-2.5 rounded-control border border-emerald-400/40 bg-emerald-400/15 p-2.5 font-mono text-[11px] text-emerald-200 flex items-center gap-2">
+              <div className="mt-2.5 rounded-control border border-emerald-400/40 bg-emerald-400/15 p-2.5 text-[12px] text-emerald-200 flex items-center gap-2">
                 <CheckCircle2 className="size-4 shrink-0 text-emerald-400" />
                 <span>{status}</span>
               </div>
@@ -67,7 +67,7 @@ export function CategoryVinBanner({ category }: { category: CategoryDetail }) {
         </div>
       </div>
 
-      {/* 2. Mobile Precision Fitment & Pressure Tested Card (Image 2) */}
+      {/* 2. Mobile Fitment & Pressure Tested Card (Image 2) */}
       <div className="md:hidden rounded-panel border border-line bg-well/70 p-4 space-y-3">
         <div className="flex items-start gap-3">
           <div className="grid size-10 place-items-center rounded-control bg-heritage text-white shrink-0">
@@ -75,7 +75,7 @@ export function CategoryVinBanner({ category }: { category: CategoryDetail }) {
           </div>
           <div>
             <h4 className="text-[15px] font-bold text-ink">
-              Precision Fitment &amp; Pressure Tested
+              Fitment &amp; Pressure Tested
             </h4>
             <p className="mt-1 text-[12px] text-mute leading-relaxed">
               Every component is batch-verified to Royal Enfield factory torque specifications and ISO-4925 standards. Guaranteed leak-free installation with hassle-free 10-day exchange.

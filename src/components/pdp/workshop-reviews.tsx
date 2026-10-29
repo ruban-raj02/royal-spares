@@ -11,8 +11,7 @@ export function WorkshopReviews({ part }: { part: Part }) {
       <div className="rounded-panel border border-line bg-canvas p-4 md:p-8">
         {/* Header */}
         <div className="border-b border-line pb-4">
-          <p className="mono-spec text-[11px] text-mute">Field Feedback</p>
-          <h2 className="text-[20px] md:text-[24px] font-bold tracking-tight text-ink mt-0.5">
+          <h2 className="text-[20px] md:text-[24px] font-bold tracking-tight text-ink">
             Verified Workshop Reviews
           </h2>
           <p className="text-[13px] text-mute mt-1">
@@ -33,7 +32,7 @@ export function WorkshopReviews({ part }: { part: Part }) {
                   <Star key={i} className="size-4 fill-amber-500 text-amber-500" />
                 ))}
               </div>
-              <p className="text-[12px] text-mute font-mono mt-1">
+              <p className="text-[12px] text-mute mt-1">
                 Based on {reviews.totalReviews} verified installations
               </p>
             </div>
@@ -42,7 +41,7 @@ export function WorkshopReviews({ part }: { part: Part }) {
           {/* Distribution Bars (8 cols) */}
           <div className="md:col-span-8 space-y-1.5">
             {reviews.distribution.map((d) => (
-              <div key={d.stars} className="flex items-center gap-3 text-[12px] font-mono text-mute">
+              <div key={d.stars} className="flex items-center gap-3 text-[12px] text-mute">
                 <span className="w-12 text-right">{d.stars} stars</span>
                 <div className="h-2 flex-1 rounded-full bg-well overflow-hidden">
                   <div
@@ -70,7 +69,7 @@ export function WorkshopReviews({ part }: { part: Part }) {
                       <Star key={i} className="size-3.5 fill-amber-500 text-amber-500" />
                     ))}
                   </div>
-                  <span className="font-mono text-[10px] text-mute">{rev.date}</span>
+                  <span className="text-[11px] text-mute">{rev.date}</span>
                 </div>
 
                 <h4 className="mt-3 text-[14px] font-semibold text-ink line-clamp-2 leading-snug">
@@ -88,12 +87,12 @@ export function WorkshopReviews({ part }: { part: Part }) {
                     <UserCheck className="size-3 text-stock" />
                     {rev.author}
                   </p>
-                  <p className="text-[10px] text-mute font-mono">
+                  <p className="text-[11px] text-mute">
                     {rev.role} · {rev.city}
                   </p>
                 </div>
-                <span className="font-mono text-[9px] font-bold text-stock uppercase bg-stock/10 px-1.5 py-0.5 rounded">
-                  VERIFIED
+                <span className="text-[10px] font-semibold text-stock bg-stock/10 px-1.5 py-0.5 rounded">
+                  Verified
                 </span>
               </div>
             </div>
@@ -109,7 +108,7 @@ export function WorkshopReviews({ part }: { part: Part }) {
           </div>
           <div>
             <h4 className="text-[14px] font-semibold text-ink">{manual.title}</h4>
-            <p className="text-[12px] text-mute font-mono">{manual.desc}</p>
+            <p className="text-[12px] text-mute">{manual.desc}</p>
           </div>
         </div>
 

@@ -46,8 +46,8 @@ export function StickyBottomBar({ part }: { part: Part }) {
               <span className="text-[14px] md:text-[16px] font-bold text-ink">
                 {inr(part.price)}
               </span>
-              <span className="font-mono text-[10px] text-mute hidden md:inline">
-                TOTAL (INCL. TAXES)
+              <span className="text-[11px] text-mute hidden md:inline">
+                (Incl. taxes)
               </span>
               <span className="chip-stock !px-1.5 !text-[10px] !py-0 shrink-0">
                 {part.stockShort}
@@ -66,7 +66,7 @@ export function StickyBottomBar({ part }: { part: Part }) {
             >
               <Minus className="size-3" />
             </button>
-            <span className="w-6 text-center font-mono text-[13px] font-semibold">{qty}</span>
+            <span className="w-6 text-center text-[13px] font-semibold">{qty}</span>
             <button
               onClick={() => setQty((q) => q + 1)}
               className="grid size-7 place-items-center rounded hover:bg-well text-mute hover:text-ink"

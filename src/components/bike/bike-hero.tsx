@@ -10,19 +10,19 @@ export function BikeHero({ bike }: { bike: BikeDetail }) {
 
   return (
     <section className="mb-6 md:mb-8">
-      {/* 1. Desktop & Tablet Top Breadcrumb + Telemetry Bar */}
-      <div className="hidden md:flex items-center justify-between border-b border-line/70 pb-3 font-mono text-[11px] text-mute">
+      {/* 1. Desktop & Tablet Top Breadcrumb Bar */}
+      <div className="hidden md:flex items-center justify-between border-b border-line/70 pb-3 text-[12px] text-mute">
         <nav aria-label="Breadcrumb">
           <ol className="flex items-center gap-2">
             <li>
               <Link href="/" className="hover:text-ink transition-colors">
-                CATALOGUE
+                Catalogue
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/bikes/classic-350" className="hover:text-ink transition-colors">
-                ROYAL ENFIELD
+                Royal Enfield
               </Link>
             </li>
             <li>/</li>
@@ -31,7 +31,7 @@ export function BikeHero({ bike }: { bike: BikeDetail }) {
                 onClick={() => setIsModalOpen(true)}
                 className="hover:text-ink font-semibold transition-colors flex items-center gap-1 cursor-pointer"
               >
-                {bike.name.toUpperCase()}
+                {bike.name}
                 <ChevronDown className="size-3" />
               </button>
             </li>
@@ -52,7 +52,7 @@ export function BikeHero({ bike }: { bike: BikeDetail }) {
         </div>
       </div>
 
-      {/* 2. Mobile Model Switcher Header (Visible on Mobile only, as in Image 3) */}
+      {/* 2. Mobile Model Switcher Header */}
       <div className="md:hidden pb-3">
         <div className="flex items-center justify-between">
           <button
@@ -62,13 +62,13 @@ export function BikeHero({ bike }: { bike: BikeDetail }) {
             <span>{bike.name}</span>
             <ChevronDown className="size-5 text-mute" />
           </button>
-          <span className="rounded-full bg-well border border-line px-2.5 py-0.5 font-mono text-[11px] font-semibold text-mute">
+          <span className="rounded-full bg-well border border-line px-2.5 py-0.5 text-[11px] font-medium text-mute">
             {bike.platformTag}
           </span>
         </div>
 
         <div className="mt-2 flex items-center justify-between rounded-control border border-line/80 bg-well/60 px-3 py-1.5 text-[12px]">
-          <span className="flex items-center gap-1.5 font-mono text-[11px] text-ink font-medium">
+          <span className="flex items-center gap-1.5 text-[12px] text-ink font-medium">
             <span className="size-2 rounded-full bg-stock" />
             {bike.garageSync}
           </span>
@@ -93,10 +93,10 @@ export function BikeHero({ bike }: { bike: BikeDetail }) {
           <div className="lg:col-span-8 space-y-3">
             {/* Badges on desktop/tablet */}
             <div className="hidden md:flex flex-wrap items-center gap-2 text-[12px]">
-              <span className="rounded-md bg-ink px-2.5 py-0.5 font-mono text-[11px] font-bold tracking-wider text-white uppercase">
-                OEM FACTORY CATALOG
+              <span className="rounded bg-well border border-line px-2 py-0.5 text-[11px] font-medium text-mute">
+                Factory Catalogue
               </span>
-              <span className="inline-flex items-center gap-1.5 rounded-md border border-stock/30 bg-stock/10 px-2.5 py-0.5 font-mono text-[11px] font-medium text-stock">
+              <span className="inline-flex items-center gap-1.5 rounded-md border border-stock/30 bg-stock/10 px-2.5 py-0.5 text-[11px] font-medium text-stock">
                 <span className="size-1.5 rounded-full bg-stock" />
                 Matched Active Garage: {bike.garageSync}
               </span>
@@ -117,13 +117,13 @@ export function BikeHero({ bike }: { bike: BikeDetail }) {
             </p>
 
             {/* Spec Strip: 4 Columns (Desktop & Tablet) */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 pt-3 border-t border-line/80 font-mono">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 pt-3 border-t border-line/80">
               {bike.specs.map((s) => (
                 <div key={s.label} className="rounded-control border border-line/70 bg-well/40 p-2.5">
-                  <span className="block text-[9px] md:text-[10px] text-mute uppercase tracking-wider">
+                  <span className="block text-[10px] text-mute font-medium">
                     {s.label}
                   </span>
-                  <span className="mt-0.5 block truncate text-[11px] md:text-[12px] font-semibold text-ink">
+                  <span className="mt-0.5 block truncate text-[12px] font-semibold text-ink">
                     {s.value}
                   </span>
                 </div>
@@ -135,9 +135,9 @@ export function BikeHero({ bike }: { bike: BikeDetail }) {
           <div className="hidden lg:flex lg:col-span-4 flex-col justify-between rounded-card border border-heritage/40 bg-gradient-to-br from-[#1d3329] to-[#12221b] p-5 text-white shadow-lg relative overflow-hidden">
             <div className="flex items-start justify-between">
               <div>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-white/70 flex items-center gap-1.5">
+                <span className="text-[11px] text-white/70 flex items-center gap-1.5 font-medium">
                   <Compass className="size-3.5 text-white" />
-                  EXPLORE MICROFICHE
+                  Explore Schematics
                 </span>
                 <h3 className="mt-1 text-[16px] font-semibold text-white">
                   Exploded Assembly View ({bike.platformTag})
@@ -149,13 +149,13 @@ export function BikeHero({ bike }: { bike: BikeDetail }) {
             </div>
 
             <p className="mt-4 text-[12px] leading-relaxed text-white/80">
-              Interactive 2D blueprints with verified torque figures and bolt patterns for certified overhaul.
+              Interactive 2D blueprints with verified torque figures and bolt patterns for workshop maintenance.
             </p>
 
             <div className="mt-5 pt-3 border-t border-white/15 flex items-center justify-between text-[11px]">
-              <span className="flex items-center gap-1 text-stock-light text-white/90 font-medium">
+              <span className="flex items-center gap-1 text-white/90 font-medium">
                 <ShieldCheck className="size-3.5 text-emerald-400" />
-                100% Fitment Warranted
+                Guaranteed Fitment
               </span>
               <button
                 onClick={() => alert("Royal Spares 100% Fitment Guarantee: All OEM parts are checked against factory microfiche.")}
@@ -166,14 +166,14 @@ export function BikeHero({ bike }: { bike: BikeDetail }) {
             </div>
           </div>
 
-          {/* Tablet Fitment Assurance Circular Graphic (md to lg) */}
+          {/* Tablet Fitment Assurance Graphic (md to lg) */}
           <div className="hidden md:flex lg:hidden col-span-4 items-center justify-center p-3 rounded-card border border-line bg-well/50">
             <div className="text-center">
               <div className="inline-flex size-16 items-center justify-center rounded-full border-4 border-heritage/30 bg-canvas text-heritage shadow-inner mb-2">
                 <ShieldCheck className="size-8 text-heritage" />
               </div>
-              <p className="text-[12px] font-bold text-ink">FITMENT ASSURANCE</p>
-              <p className="text-[11px] font-mono text-stock">100% Factory Tolerance</p>
+              <p className="text-[12px] font-semibold text-ink">Fitment Assurance</p>
+              <p className="text-[11px] text-stock">100% Factory Tolerance</p>
             </div>
           </div>
         </div>

@@ -37,9 +37,9 @@ export function ProductGallery({ part }: { part: Part }) {
       {/* Top Banner Badges */}
       <div className="flex items-center justify-between gap-2 text-[12px]">
         <div className="inline-flex items-center gap-1.5 rounded-full bg-stock/10 border border-stock/20 px-3 py-1 font-medium text-stock">
-          <span className="size-2 rounded-full bg-stock animate-pulse" />
+          <span className="size-2 rounded-full bg-stock" />
           <span>Genuine OEM Sealed</span>
-          <span className="text-mute font-mono text-[10px]">· {part.batch}</span>
+          <span className="text-mute text-[11px]">· {part.batch}</span>
         </div>
 
         <button

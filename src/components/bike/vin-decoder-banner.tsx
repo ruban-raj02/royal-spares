@@ -21,11 +21,11 @@ export function VinDecoderBanner({ garageSync = "KA-01-MJ-4520" }: { garageSync?
 
   return (
     <div className="mt-8 md:mt-12 space-y-4">
-      {/* Desktop & Tablet Banner (Images 1 & 2) */}
+      {/* Desktop & Tablet Banner */}
       <div className="hidden md:block rounded-panel border border-line bg-gradient-to-r from-canvas via-well/40 to-canvas p-6 lg:p-8 shadow-sm">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           <div className="lg:col-span-7 flex items-start gap-4">
-            <div className="grid size-12 place-items-center rounded-xl bg-ink text-white font-mono font-bold text-[16px] shrink-0 shadow-sm">
+            <div className="grid size-12 place-items-center rounded-xl bg-ink text-white font-bold text-[15px] shrink-0 shadow-sm">
               VIN
             </div>
             <div>
@@ -57,16 +57,16 @@ export function VinDecoderBanner({ garageSync = "KA-01-MJ-4520" }: { garageSync?
               </button>
             </form>
 
-            <div className="mt-2 flex items-center gap-3 font-mono text-[11px] text-mute">
+            <div className="mt-2 flex items-center gap-3 text-[12px] text-mute">
               <span className="flex items-center gap-1 text-stock font-medium">
-                <CheckCircle2 className="size-3" /> Zero Fitment Error Liability
+                <CheckCircle2 className="size-3" /> Guaranteed Fitment
               </span>
               <span>·</span>
-              <span>Instant Chassis Decode</span>
+              <span>Instant Chassis Lookup</span>
             </div>
 
             {decoded && (
-              <div className="mt-3 rounded-control border border-stock/30 bg-stock/10 p-2.5 font-mono text-[11px] text-stock flex items-center gap-2 animate-in fade-in">
+              <div className="mt-3 rounded-control border border-stock/30 bg-stock/10 p-2.5 text-[12px] text-stock flex items-center gap-2 animate-in fade-in">
                 <CheckCircle2 className="size-4 shrink-0" />
                 <span>{decoded}</span>
               </div>
@@ -75,21 +75,21 @@ export function VinDecoderBanner({ garageSync = "KA-01-MJ-4520" }: { garageSync?
         </div>
       </div>
 
-      {/* Mobile Precision VIN Guarantee Card (Image 3) */}
+      {/* Mobile VIN Guarantee Card */}
       <div className="md:hidden rounded-panel border border-line bg-well/70 p-4 space-y-3">
         <div className="flex items-start justify-between">
           <div className="grid size-10 place-items-center rounded-control bg-heritage text-white">
             <ShieldCheck className="size-6" />
           </div>
-          <span className="rounded bg-canvas border border-line px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-mute uppercase">
-            100% ZERO-RISK
+          <span className="rounded bg-canvas border border-line px-2 py-0.5 text-[11px] font-medium text-mute">
+            Guaranteed Fit
           </span>
         </div>
 
         <div>
-          <h4 className="text-[16px] font-bold text-ink">Precision VIN Guarantee</h4>
+          <h4 className="text-[16px] font-bold text-ink">Fitment Guarantee</h4>
           <p className="mt-1 text-[12px] leading-relaxed text-mute">
-            Every part shipped for <b className="text-ink font-mono">{garageSync}</b> is physically verified against factory parts fiche. If it doesn&apos;t bolt on seamlessly, we offer instant doorstep replacement.
+            Every part shipped for <b className="text-ink font-medium">{garageSync}</b> is physically verified against factory parts fiche. If it doesn&apos;t fit your motorcycle, we offer instant replacement.
           </p>
         </div>
 

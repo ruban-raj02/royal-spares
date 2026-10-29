@@ -48,7 +48,7 @@ export default async function BikeSlugPage({
       <TrustStrip />
 
       <main className="shell section !pt-4 pb-20 md:pb-28">
-        {/* Hero Section (Breadcrumb, Telemetry, Spec Strip & Microfiche Card) */}
+        {/* Hero Section (Breadcrumb, Inventory, Spec Strip & Schematics Card) */}
         <BikeHero bike={bike} />
 
         {/* Catalog Main View (Assemblies, Filters Sidebar, Product Grid / List) */}

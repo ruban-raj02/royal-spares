@@ -15,14 +15,14 @@ export function TechSpecsAndContents({ part }: { part: Part }) {
               <Sliders className="size-4 text-heritage" />
               <h3 className="text-[18px] font-semibold text-ink">Detailed Technical Specifications</h3>
             </div>
-            <span className="font-mono text-[11px] text-mute">OEM SPEC SHEET</span>
+            <span className="text-[12px] text-mute">OEM Spec Sheet</span>
           </div>
 
           <div className="mt-4 divide-y divide-line/60">
             {specs.map((item, idx) => (
               <div key={idx} className="flex items-start justify-between py-2.5 text-[13px] gap-4">
                 <span className="text-mute font-normal">{item.label}</span>
-                <span className="font-medium text-ink text-right font-mono text-[12px]">
+                <span className="font-medium text-ink text-right text-[13px]">
                   {item.value}
                 </span>
               </div>
@@ -30,9 +30,9 @@ export function TechSpecsAndContents({ part }: { part: Part }) {
           </div>
         </div>
 
-        <div className="mt-6 pt-4 border-t border-line flex items-center justify-between text-[11px] text-mute font-mono">
-          <span>TOLERANCE CODE: DIN 8187</span>
-          <span className="text-stock flex items-center gap-1 font-sans font-medium">
+        <div className="mt-6 pt-4 border-t border-line flex items-center justify-between text-[12px] text-mute">
+          <span>Tolerance standard: DIN 8187</span>
+          <span className="text-stock flex items-center gap-1 font-medium">
             <CheckCircle2 className="size-3" /> Metrology Certified
           </span>
         </div>
@@ -46,7 +46,7 @@ export function TechSpecsAndContents({ part }: { part: Part }) {
               <Package className="size-4 text-heritage" />
               <h3 className="text-[18px] font-semibold text-ink">What&apos;s In The Factory Box</h3>
             </div>
-            <span className="font-mono text-[11px] text-mute">SEALED INVENTORY</span>
+            <span className="text-[12px] text-mute">Sealed Inventory</span>
           </div>
 
           <p className="mt-3 text-[12px] text-mute">
@@ -60,15 +60,15 @@ export function TechSpecsAndContents({ part }: { part: Part }) {
                 className="flex items-start justify-between rounded-control border border-line/80 bg-well/40 p-3"
               >
                 <div className="flex items-start gap-3">
-                  <span className="font-mono text-[11px] font-bold text-mute bg-canvas px-1.5 py-0.5 rounded border border-line">
+                  <span className="text-[11px] font-bold text-mute bg-canvas px-1.5 py-0.5 rounded border border-line">
                     {pkg.index}
                   </span>
                   <div>
                     <h4 className="text-[13px] font-medium text-ink">{pkg.name}</h4>
-                    <p className="text-[11px] text-mute font-mono mt-0.5">{pkg.spec}</p>
+                    <p className="text-[11px] text-mute mt-0.5">{pkg.spec}</p>
                   </div>
                 </div>
-                <span className="shrink-0 font-mono text-[11px] font-semibold text-ink bg-canvas px-2 py-0.5 rounded border border-line">
+                <span className="shrink-0 text-[11px] font-semibold text-ink bg-canvas px-2 py-0.5 rounded border border-line">
                   {pkg.qty}
                 </span>
               </div>
@@ -83,12 +83,12 @@ export function TechSpecsAndContents({ part }: { part: Part }) {
             <div>
               <p className="text-[12px] font-semibold text-ink">Digital Certificate of Authenticity</p>
               <p className="text-[11px] text-mute">
-                Serial cryptographic QR label for instant warranty activation
+                QR label for instant warranty activation
               </p>
             </div>
           </div>
-          <span className="font-mono text-[10px] font-bold text-stock uppercase bg-canvas px-2 py-1 rounded border border-stock/20">
-            QR VERIFIED
+          <span className="text-[11px] font-medium text-stock bg-canvas px-2 py-0.5 rounded border border-stock/20">
+            Verified
           </span>
         </div>
       </div>

@@ -59,16 +59,15 @@ export function FrequentlyBoughtTogether({ part }: { part: Part }) {
       {/* Header */}
       <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between border-b border-line pb-4">
         <div>
-          <p className="mono-spec text-[11px] text-mute">{bundle.title}</p>
-          <h2 className="text-[20px] md:text-[24px] font-bold tracking-tight text-ink mt-0.5">
+          <h2 className="text-[20px] md:text-[24px] font-bold tracking-tight text-ink">
             Frequently Bought Together with Kit #{part.oem}
           </h2>
           <p className="text-[13px] text-mute mt-1">
-            Commonly replaced during major service intervals for maximum longevity and zero vibration.
+            Commonly replaced during major service intervals for maximum longevity and balanced operation.
           </p>
         </div>
 
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-stock/10 border border-stock/20 px-3 py-1 font-mono text-[11px] font-medium text-stock self-start md:self-auto">
+        <div className="inline-flex items-center gap-1.5 text-[12px] font-medium text-stock self-start md:self-auto">
           <Sparkles className="size-3.5" />
           <span>{bundle.discountText}</span>
         </div>
@@ -82,12 +81,12 @@ export function FrequentlyBoughtTogether({ part }: { part: Part }) {
             <div className="relative size-20 rounded-lg bg-canvas border border-line overflow-hidden p-1 shrink-0 flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={part.img} alt={part.name} className="h-full w-full object-contain" />
-              <span className="absolute top-1 left-1 bg-ink text-white font-mono text-[9px] px-1 rounded">
-                MAIN
+              <span className="absolute top-1 left-1 bg-ink text-white text-[9px] px-1 rounded font-medium">
+                Main
               </span>
             </div>
             <div className="min-w-0 flex-1">
-              <span className="mono-spec text-[10px] block">OEM #{part.oem}</span>
+              <span className="part-ref text-[11px] block">OEM #{part.oem}</span>
               <h4 className="text-[14px] font-semibold text-ink line-clamp-1 mt-0.5">
                 {part.name}
               </h4>
@@ -123,7 +122,7 @@ export function FrequentlyBoughtTogether({ part }: { part: Part }) {
                     <img src={it.img} alt={it.name} className="h-full w-full object-contain" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <span className="mono-spec text-[10px] block">OEM #{it.oem}</span>
+                    <span className="part-ref text-[11px] block">OEM #{it.oem}</span>
                     <h4 className="text-[14px] font-semibold text-ink line-clamp-1 mt-0.5">
                       {it.name}
                     </h4>
@@ -157,10 +156,10 @@ export function FrequentlyBoughtTogether({ part }: { part: Part }) {
           <div className="flex items-baseline gap-2 mt-0.5">
             <span className="text-[24px] font-bold text-ink">{inr(finalPrice)}</span>
             {bundleDiscount > 0 && (
-              <span className="font-mono text-[14px] text-mute line-through">{inr(rawTotal)}</span>
+              <span className="text-[14px] text-mute line-through">{inr(rawTotal)}</span>
             )}
             {bundleDiscount > 0 && (
-              <span className="font-mono text-[11px] font-semibold text-stock bg-stock/10 px-2 py-0.5 rounded">
+              <span className="text-[12px] font-semibold text-stock bg-stock/10 px-2 py-0.5 rounded">
                 Save {inr(bundleDiscount)} on combo
               </span>
             )}

@@ -1,6 +1,8 @@
 "use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { House, Bike, Search, ShoppingBag, User, ArrowRight } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { House, Bike, Search, BookOpen, ShoppingBag, User, ArrowRight } from "lucide-react";
 import { footerCols, inr } from "@/lib/data";
 import { useCart } from "@/components/cart";
 import { Logo } from "./header";
@@ -22,7 +24,7 @@ export function Footer() {
               aria-label={c.title}
               className={`${i >= 3 ? "hidden lg:block" : i === 0 ? "hidden lg:block" : ""} mt-8 lg:mt-0`}
             >
-              <h3 className="mono-spec !text-ink">{c.title}</h3>
+              <h3 className="text-[13px] font-semibold text-ink">{c.title}</h3>
               <ul className="mt-3 space-y-2">
                 {c.links.map((l) => (
                   <li key={l}>
@@ -36,7 +38,7 @@ export function Footer() {
           ))}
           {/* mobile-only compact columns */}
           <nav className="mt-8 lg:hidden">
-            <h3 className="mono-spec !text-ink">Support &amp; orders</h3>
+            <h3 className="text-[13px] font-semibold text-ink">Support &amp; orders</h3>
             <ul className="mt-3 space-y-2 text-[13px] text-mute">
               <li>Track My Order</li>
               <li>Fitment Guarantee</li>
@@ -45,20 +47,20 @@ export function Footer() {
             </ul>
           </nav>
           <nav className="mt-8 lg:hidden">
-            <h3 className="mono-spec !text-ink">Gear hubs</h3>
+            <h3 className="text-[13px] font-semibold text-ink">Regional depots</h3>
             <ul className="mt-3 space-y-2 text-[13px] text-mute">
-              <li>Chennai Hub (HQ)</li>
-              <li>Bengaluru Hub</li>
-              <li>Delhi NCR Cargo</li>
-              <li>Mumbai Air Depot</li>
+              <li>Chennai Depot</li>
+              <li>Bengaluru Depot</li>
+              <li>Delhi NCR Depot</li>
+              <li>Mumbai Depot</li>
             </ul>
           </nav>
         </div>
-        <div className="mt-10 flex flex-col gap-2 border-t border-line pt-5 font-mono text-[11px] text-mute md:flex-row md:justify-between">
-          <p>© 2026 RoyalSpares.in. Precision OEM Motorcycle Components. All Royal Enfield model names and marks belong to Eicher Motors Ltd.</p>
+        <div className="mt-10 flex flex-col gap-2 border-t border-line pt-5 text-[12px] text-mute md:flex-row md:justify-between">
+          <p>© 2026 RoyalSpares.in. Genuine Royal Enfield replacement parts. All model names and marks belong to Eicher Motors Ltd.</p>
           <p className="flex items-center gap-2">
             <span className="size-1.5 rounded-full bg-stock" />
-            Dispatch: Active · 256-bit encrypted checkout
+            Dispatch: Active · Secure checkout
           </p>
         </div>
       </div>
@@ -78,7 +80,7 @@ export function CartBar() {
         </span>
         <span className="min-w-0 flex-1 truncate text-[13px] font-medium">
           {last.name}
-          <span className="ml-2 font-mono text-[12px] opacity-70">{inr(last.price)}</span>
+          <span className="ml-2 text-[12px] opacity-80 font-medium">{inr(last.price)}</span>
         </span>
         <button
           onClick={() => setIsOpen(true)}
@@ -93,7 +95,13 @@ export function CartBar() {
 
 /** Mobile only. */
 export function BottomNav() {
+  const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
   const { count, setIsOpen } = useCart();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <nav
@@ -104,7 +112,9 @@ export function BottomNav() {
         <li>
           <Link
             href="/"
-            className="relative flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium text-ink"
+            className={`relative flex h-16 flex-col items-center justify-center gap-1 text-[11px] ${
+              mounted && pathname === "/" ? "font-semibold text-ink" : "text-mute hover:text-ink font-medium"
+            }`}
           >
             <House className="size-5" />
             Home
@@ -113,7 +123,9 @@ export function BottomNav() {
         <li>
           <Link
             href="/bikes/classic-350"
-            className="relative flex h-16 flex-col items-center justify-center gap-1 text-[11px] text-mute hover:text-ink"
+            className={`relative flex h-16 flex-col items-center justify-center gap-1 text-[11px] ${
+              mounted && pathname?.startsWith("/bikes") ? "font-semibold text-ink" : "text-mute hover:text-ink font-medium"
+            }`}
           >
             <Bike className="size-5" />
             Bikes
@@ -122,30 +134,40 @@ export function BottomNav() {
         <li>
           <Link
             href="/categories/brakes-hydraulics"
-            className="relative flex h-16 flex-col items-center justify-center gap-1 text-[11px] text-mute hover:text-ink"
+            className={`relative flex h-16 flex-col items-center justify-center gap-1 text-[11px] ${
+              mounted && (pathname?.startsWith("/categories") || pathname?.startsWith("/parts"))
+                ? "font-semibold text-ink"
+                : "text-mute hover:text-ink font-medium"
+            }`}
           >
             <Search className="size-5" />
-            Parts
+            Search
           </Link>
         </li>
         <li>
           <button
             onClick={() => setIsOpen(true)}
-            className="relative flex h-16 w-full flex-col items-center justify-center gap-1 text-[11px] text-mute"
+            className={`relative flex h-16 w-full flex-col items-center justify-center gap-1 text-[11px] cursor-pointer ${
+              mounted && pathname === "/cart" ? "font-semibold text-ink" : "text-mute hover:text-ink font-medium"
+            }`}
           >
-            <ShoppingBag className="size-5" />
+            <div className="relative">
+              <ShoppingBag className="size-5" />
+              {mounted && count > 0 && (
+                <span className="absolute -top-1 -right-2 grid size-4 place-items-center rounded-full bg-heritage text-[9px] font-bold text-white">
+                  {count}
+                </span>
+              )}
+            </div>
             Bag
-            {count > 0 && (
-              <span className="absolute right-[28%] top-2 grid size-4 place-items-center rounded-full bg-heritage text-[10px] text-white">
-                {count}
-              </span>
-            )}
           </button>
         </li>
         <li>
           <Link
             href="/account"
-            className="relative flex h-16 flex-col items-center justify-center gap-1 text-[11px] text-mute"
+            className={`relative flex h-16 flex-col items-center justify-center gap-1 text-[11px] ${
+              mounted && pathname?.startsWith("/account") ? "font-semibold text-ink" : "text-mute hover:text-ink font-medium"
+            }`}
           >
             <User className="size-5" />
             Account

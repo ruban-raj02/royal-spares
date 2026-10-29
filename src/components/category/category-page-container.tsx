@@ -11,7 +11,7 @@ export function CategoryPageContainer({ category }: { category: CategoryDetail }
 
   return (
     <>
-      {/* 1. Category Hero (Header, Telemetry, Category Switcher & Compatibility Bar) */}
+      {/* 1. Category Hero (Header, Status, Category Switcher & Compatibility Bar) */}
       <CategoryHero
         category={category}
         selectedBikeFilter={selectedBikeFilter}

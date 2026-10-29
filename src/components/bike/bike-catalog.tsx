@@ -282,7 +282,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
         {/* Left Sidebar Filters (Desktop Only, 3 Cols) */}
         <aside className="hidden lg:block lg:col-span-3 rounded-card border border-line bg-canvas p-5 space-y-6">
           <div className="flex items-center justify-between pb-3 border-b border-line">
-            <span className="mono-spec text-[11px] font-bold text-ink">FILTERS</span>
+            <span className="text-[13px] font-semibold text-ink">Filters</span>
             <button
               onClick={resetFilters}
               className="text-[12px] text-mute hover:text-ink flex items-center gap-1 cursor-pointer"
@@ -293,8 +293,8 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
 
           {/* Trim Edition Filter */}
           <div className="space-y-2.5">
-            <h4 className="mono-spec text-[10px] text-ink font-semibold">
-              TRIM EDITION ({bike.platformTag})
+            <h4 className="text-[12px] text-ink font-semibold">
+              Trim Edition ({bike.platformTag})
             </h4>
             <div className="space-y-1.5 text-[13px]">
               {trimOptions.map((opt) => (
@@ -311,7 +311,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                     />
                     <span className="truncate">{opt.name}</span>
                   </div>
-                  <span className="font-mono text-[11px] text-mute/80 pl-2">{opt.count}</span>
+                  <span className="text-[12px] text-mute/80 pl-2">{opt.count}</span>
                 </label>
               ))}
             </div>
@@ -328,14 +328,14 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
               />
               <div>
                 <span className="text-[13px] font-medium text-ink block">Ready to Dispatch</span>
-                <span className="text-[11px] text-mute font-mono block">Bangalore Depot Only</span>
+                <span className="text-[11px] text-mute block">Bangalore Depot Only</span>
               </div>
             </label>
           </div>
 
           {/* Major Assembly Filter */}
           <div className="pt-3 border-t border-line/70 space-y-2.5">
-            <h4 className="mono-spec text-[10px] text-ink font-semibold">MAJOR ASSEMBLY</h4>
+            <h4 className="text-[12px] text-ink font-semibold">Major Assembly</h4>
             <div className="space-y-1.5 text-[13px]">
               {bike.assemblies
                 .filter((a) => a.id !== "all")
@@ -353,7 +353,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                       />
                       <span className="truncate">{asm.name}</span>
                     </div>
-                    <span className="font-mono text-[11px] text-mute/80">{asm.count}</span>
+                    <span className="text-[12px] text-mute/80">{asm.count}</span>
                   </label>
                 ))}
             </div>
@@ -361,7 +361,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
 
           {/* Top-1 OEM Brand Filter */}
           <div className="pt-3 border-t border-line/70 space-y-2.5">
-            <h4 className="mono-spec text-[10px] text-ink font-semibold">TOP-1 OEM BRAND</h4>
+            <h4 className="text-[12px] text-ink font-semibold">OEM Brand</h4>
             <div className="space-y-1.5 text-[13px]">
               {brandOptions.map((brand) => (
                 <label
@@ -383,8 +383,8 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
           {/* Price Range Slider */}
           <div className="pt-3 border-t border-line/70 space-y-2">
             <div className="flex items-center justify-between">
-              <span className="mono-spec text-[10px] text-ink font-semibold">PRICE RANGE</span>
-              <span className="font-mono text-[11px] text-ink font-semibold">
+              <span className="text-[12px] text-ink font-semibold">Price Range</span>
+              <span className="text-[12px] text-ink font-semibold">
                 {inr(185)} – {inr(priceMax)}
               </span>
             </div>
@@ -397,7 +397,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
               onChange={(e) => setPriceMax(Number(e.target.value))}
               className="w-full accent-heritage cursor-pointer"
             />
-            <div className="flex justify-between font-mono text-[10px] text-mute">
+            <div className="flex justify-between text-[11px] text-mute">
               <span>{inr(185)}</span>
               <span>{inr(12500)}</span>
             </div>
@@ -464,7 +464,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                           alt={item.name}
                           className="h-full w-full object-contain filter drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
                         />
-                        <span className="absolute bottom-2 left-2 rounded bg-ink/75 px-1.5 py-0.5 font-mono text-[9px] text-white backdrop-blur">
+                        <span className="absolute bottom-2 left-2 rounded bg-ink/75 px-1.5 py-0.5 text-[10px] text-white backdrop-blur">
                           {item.specLabel}
                         </span>
                       </Link>
@@ -491,11 +491,11 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                       <div className="flex items-baseline justify-between">
                         <div>
                           <span className="text-[18px] font-bold text-ink">{inr(item.price)}</span>
-                          <span className="ml-2 font-mono text-[12px] text-mute line-through">
+                          <span className="ml-2 text-[13px] text-mute line-through">
                             {inr(item.mrp)}
                           </span>
                         </div>
-                        <span className="font-mono text-[11px] text-mute">{item.stockText}</span>
+                        <span className="text-[12px] text-mute">{item.stockText}</span>
                       </div>
 
                       <button
@@ -537,7 +537,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                           alt={item.name}
                           className="h-full w-full object-contain"
                         />
-                        <span className="absolute top-1 left-1 rounded bg-canvas border border-line px-1 py-0.2 font-mono text-[8px] font-bold text-mute">
+                        <span className="absolute top-1 left-1 rounded bg-canvas border border-line px-1 py-0.2 text-[9px] font-bold text-mute">
                           OEM
                         </span>
                       </Link>
@@ -548,7 +548,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                           <span className="font-mono text-[10px] font-semibold text-mute truncate">
                             OEM # {item.oem}
                           </span>
-                          <span className="inline-flex items-center gap-1 rounded bg-stock/15 px-1.5 py-0.2 font-mono text-[9px] font-bold text-stock uppercase">
+                          <span className="inline-flex items-center gap-1 rounded bg-stock/15 px-1.5 py-0.2 text-[10px] font-bold text-stock uppercase">
                             <span className="size-1.5 rounded-full bg-stock" /> Match
                           </span>
                         </div>
@@ -563,10 +563,10 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
 
                         <div className="mt-1 flex items-baseline gap-2">
                           <span className="text-[15px] font-bold text-ink">{inr(item.price)}</span>
-                          <span className="font-mono text-[11px] text-mute line-through">
+                          <span className="text-[12px] text-mute line-through">
                             {inr(item.mrp)}
                           </span>
-                          <span className="rounded bg-stock/10 px-1 py-0.2 font-mono text-[10px] font-bold text-stock">
+                          <span className="rounded bg-stock/10 px-1 py-0.2 text-[11px] font-semibold text-stock">
                             {item.discountPct}% OFF
                           </span>
                         </div>
@@ -576,10 +576,10 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                     {/* Bottom Status & Add Action */}
                     <div className="pt-2 border-t border-line/60 flex items-center justify-between gap-2">
                       <div className="min-w-0">
-                        <p className="flex items-center gap-1 font-mono text-[10px] text-stock font-medium">
+                        <p className="flex items-center gap-1 text-[11px] text-stock font-medium">
                           <Zap className="size-3 text-stock fill-stock" /> Next Day Delivery
                         </p>
-                        <p className="font-mono text-[10px] text-mute truncate mt-0.5">
+                        <p className="text-[11px] text-mute truncate mt-0.5">
                           {item.stockDepot}
                         </p>
                       </div>
@@ -616,7 +616,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                         }}
                       />
                     </div>
-                    <span className="font-mono text-[11px] text-mute">
+                    <span className="text-[12px] text-mute">
                       Showing {Math.min(mobileVisibleCount, sortedParts.length)} of {sortedParts.length} parts
                     </span>
                   </div>
@@ -634,7 +634,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
               </div>
 
               {/* Desktop & Tablet Pagination (Images 1 & 2) */}
-              <div className="hidden md:flex items-center justify-between border-t border-line pt-5 font-mono text-[12px] text-mute">
+              <div className="hidden md:flex items-center justify-between border-t border-line pt-5 text-[12px] text-mute">
                 <span>Showing 1 to {sortedParts.length} of {sortedParts.length} Parts (Page 1 of 1)</span>
                 <div className="flex items-center gap-1">
                   <button className="grid size-8 place-items-center rounded-control border border-line bg-canvas text-mute hover:border-ink cursor-pointer">
@@ -681,7 +681,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
 
               <div className="flex-1 overflow-y-auto p-5 space-y-5">
                 <div>
-                  <h4 className="mono-spec text-[11px] text-ink font-semibold mb-2">TRIM EDITION</h4>
+                  <h4 className="text-[13px] text-ink font-semibold mb-2">Trim Edition</h4>
                   <div className="space-y-2 text-[13px]">
                     {trimOptions.map((opt) => (
                       <label key={opt.name} className="flex items-center justify-between text-mute">
@@ -694,7 +694,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                           />
                           {opt.name}
                         </span>
-                        <span className="font-mono text-[11px] text-mute/80">{opt.count}</span>
+                        <span className="text-[12px] text-mute/80">{opt.count}</span>
                       </label>
                     ))}
                   </div>
@@ -713,7 +713,7 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                 </div>
 
                 <div className="pt-3 border-t border-line/60">
-                  <h4 className="mono-spec text-[11px] text-ink font-semibold mb-2">OEM BRANDS</h4>
+                  <h4 className="text-[13px] text-ink font-semibold mb-2">OEM Brands</h4>
                   <div className="space-y-2 text-[13px]">
                     {brandOptions.map((brand) => (
                       <label key={brand} className="flex items-center gap-2 text-mute">
@@ -731,8 +731,8 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
 
                 <div className="pt-3 border-t border-line/60">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="mono-spec text-[11px] text-ink font-semibold">MAX PRICE</span>
-                    <span className="font-mono text-[12px] font-bold text-ink">{inr(priceMax)}</span>
+                    <span className="text-[13px] text-ink font-semibold">Max Price</span>
+                    <span className="text-[13px] font-semibold text-ink">{inr(priceMax)}</span>
                   </div>
                   <input
                     type="range"

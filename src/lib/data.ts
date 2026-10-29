@@ -632,9 +632,27 @@ export function getPartByIdOrSlug(identifier: string): Part | undefined {
 }
 
 export const articles = [
-  { kind: "Fitment advisory · 5 min read", title: "Choosing the right Royal Enfield spare parts: OEM vs Aftermarket fitment guide", body: "Why dimensional tolerance matters on modern J-Series and 650 Twin engines. Comparing metallurgical density and seal durability across critical wear items.", cta: "Read technical memo", img: "/images/engine-filters.jpg" },
-  { kind: "Catalog architecture · 6 min read", title: "Understanding Royal Enfield OEM part numbering & microfiche schemes", body: "Decode prefixes, letter revisions (/A, /C, /E), and sub-assembly trees to match your chassis was assembled with at Oragadam.", cta: "Read catalog guide", img: "/images/continental-gt-650.avif" },
-  { kind: "Service protocol · 5 min read", title: "Chain tensioning & sprocket maintenance interval guide for J-Series engines", body: "Recommended slack measurements (25–30mm), rear axle nut torque specs (70 Nm), and inspection parameters before long touring legs.", cta: "Read service guide", img: "/images/chain-sprocket.jpg" },
+  {
+    kind: "Engineering Whitepaper · 12 min read",
+    title: "Decoding the J-Series 349cc Engine: Architecture, Oil Circuitry & Valve Tolerances",
+    body: "A mechanical breakdown of Royal Enfield's counterbalanced single: metallurgy, high-pressure galleries, and critical service tolerances.",
+    cta: "Read full protocol",
+    img: "/images/classic-350.avif",
+  },
+  {
+    kind: "Catalog architecture · 6 min read",
+    title: "Understanding Royal Enfield OEM part numbering & microfiche schemes",
+    body: "Decode prefixes, letter revisions (/A, /C, /E), and sub-assembly trees to match your chassis was assembled with at Oragadam.",
+    cta: "Read catalog guide",
+    img: "/images/continental-gt-650.avif",
+  },
+  {
+    kind: "Service protocol · 5 min read",
+    title: "Chain tensioning & sprocket maintenance interval guide for J-Series engines",
+    body: "Recommended slack measurements (25–30mm), rear axle nut torque specs (70 Nm), and inspection parameters before long touring legs.",
+    cta: "Read service guide",
+    img: "/images/chain-sprocket.jpg",
+  },
 ];
 
 export const footerCols = [

@@ -307,12 +307,12 @@ export function CategoryCatalog({
         {/* Left Sidebar Filters (Desktop Only, 3 Cols, Image 3) */}
         <aside className="hidden lg:block lg:col-span-3 rounded-card border border-line bg-canvas p-5 space-y-6">
           <div className="flex items-center justify-between pb-3 border-b border-line">
-            <span className="mono-spec text-[11px] font-bold text-ink">FILTERS</span>
+            <span className="text-[13px] font-semibold text-ink">Filters</span>
             <button
               onClick={resetFilters}
               className="text-[12px] text-mute hover:text-ink flex items-center gap-1 cursor-pointer"
             >
-              <RotateCcw className="size-3" /> RESET ALL
+              <RotateCcw className="size-3" /> Reset all
             </button>
           </div>
 
@@ -327,14 +327,14 @@ export function CategoryCatalog({
               />
               <div>
                 <span className="text-[13px] font-medium text-ink block">In-Stock Only</span>
-                <span className="text-[11px] text-mute font-mono block">Depot BLR &amp; MAA ready</span>
+                <span className="text-[11px] text-mute block">Depot BLR &amp; MAA ready</span>
               </div>
             </label>
           </div>
 
           {/* Sub-Categories List */}
           <div className="pt-3 border-t border-line/70 space-y-2">
-            <h4 className="mono-spec text-[10px] text-ink font-semibold">SUB-CATEGORIES</h4>
+            <h4 className="text-[12px] text-ink font-semibold">Sub-Categories</h4>
             <div className="space-y-1.5 text-[13px]">
               {category.subCategories
                 .filter((s) => s.id !== "all")
@@ -354,7 +354,7 @@ export function CategoryCatalog({
                       />
                       <span className="truncate">{sub.name}</span>
                     </div>
-                    <span className="font-mono text-[11px] text-mute/80">{sub.count}</span>
+                    <span className="text-[12px] text-mute/80">{sub.count}</span>
                   </label>
                 ))}
             </div>
@@ -362,7 +362,7 @@ export function CategoryCatalog({
 
           {/* Model Compatibility */}
           <div className="pt-3 border-t border-line/70 space-y-2">
-            <h4 className="mono-spec text-[10px] text-ink font-semibold">MODEL COMPATIBILITY</h4>
+            <h4 className="text-[12px] text-ink font-semibold">Model Compatibility</h4>
             <div className="space-y-1.5 text-[13px]">
               {modelOptions.map((opt) => (
                 <label
@@ -378,7 +378,7 @@ export function CategoryCatalog({
                     />
                     <span className="truncate">{opt.name}</span>
                   </div>
-                  <span className="font-mono text-[11px] text-mute/80">{opt.count}</span>
+                  <span className="text-[12px] text-mute/80">{opt.count}</span>
                 </label>
               ))}
             </div>
@@ -386,7 +386,7 @@ export function CategoryCatalog({
 
           {/* OEM Manufacturer */}
           <div className="pt-3 border-t border-line/70 space-y-2">
-            <h4 className="mono-spec text-[10px] text-ink font-semibold">OEM MANUFACTURER</h4>
+            <h4 className="text-[12px] text-ink font-semibold">OEM Manufacturer</h4>
             <div className="space-y-1.5 text-[13px]">
               {manufacturerOptions.map((mfr) => (
                 <label
@@ -407,7 +407,7 @@ export function CategoryCatalog({
 
           {/* Mount Position */}
           <div className="pt-3 border-t border-line/70 space-y-2">
-            <h4 className="mono-spec text-[10px] text-ink font-semibold">MOUNT POSITION</h4>
+            <h4 className="text-[12px] text-ink font-semibold">Mount Position</h4>
             <div className="grid grid-cols-2 gap-2 text-[12px]">
               <button
                 type="button"
@@ -448,8 +448,8 @@ export function CategoryCatalog({
           {/* Price Bracket Slider */}
           <div className="pt-3 border-t border-line/70 space-y-2">
             <div className="flex items-center justify-between">
-              <span className="mono-spec text-[10px] text-ink font-semibold">PRICE BRACKET</span>
-              <span className="font-mono text-[11px] text-ink font-semibold">
+              <span className="text-[12px] text-ink font-semibold">Price Bracket</span>
+              <span className="text-[12px] text-ink font-semibold">
                 {inr(340)} – {inr(maxPrice)}
               </span>
             </div>
@@ -462,7 +462,7 @@ export function CategoryCatalog({
               onChange={(e) => setMaxPrice(Number(e.target.value))}
               className="w-full accent-heritage cursor-pointer"
             />
-            <div className="flex justify-between font-mono text-[10px] text-mute">
+            <div className="flex justify-between text-[11px] text-mute">
               <span>{inr(340)}</span>
               <span>{inr(4850)}</span>
             </div>
@@ -753,7 +753,7 @@ export function CategoryCatalog({
               <div className="flex-1 overflow-y-auto p-5 space-y-5">
                 {/* Mount Position */}
                 <div>
-                  <h4 className="mono-spec text-[11px] text-ink font-semibold mb-2">MOUNT POSITION</h4>
+                  <h4 className="text-[13px] text-ink font-semibold mb-2">Mount Position</h4>
                   <div className="grid grid-cols-2 gap-2 text-[12px]">
                     <button
                       type="button"
@@ -782,7 +782,7 @@ export function CategoryCatalog({
 
                 {/* Sub-categories */}
                 <div className="pt-3 border-t border-line/60">
-                  <h4 className="mono-spec text-[11px] text-ink font-semibold mb-2">SUB-CATEGORIES</h4>
+                  <h4 className="text-[13px] text-ink font-semibold mb-2">Sub-Categories</h4>
                   <div className="space-y-2 text-[13px]">
                     {category.subCategories
                       .filter((s) => s.id !== "all")
@@ -799,7 +799,7 @@ export function CategoryCatalog({
                             />
                             {sub.name}
                           </span>
-                          <span className="font-mono text-[11px] text-mute/80">{sub.count}</span>
+                          <span className="text-[12px] text-mute/80">{sub.count}</span>
                         </label>
                       ))}
                   </div>
@@ -807,8 +807,8 @@ export function CategoryCatalog({
 
                 {/* Model Compatibility */}
                 <div className="pt-3 border-t border-line/60">
-                  <h4 className="mono-spec text-[11px] text-ink font-semibold mb-2">
-                    MODEL COMPATIBILITY
+                  <h4 className="text-[13px] text-ink font-semibold mb-2">
+                    Model Compatibility
                   </h4>
                   <div className="space-y-2 text-[13px]">
                     {modelOptions.map((opt) => (
@@ -822,7 +822,7 @@ export function CategoryCatalog({
                           />
                           {opt.name}
                         </span>
-                        <span className="font-mono text-[11px] text-mute/80">{opt.count}</span>
+                        <span className="text-[12px] text-mute/80">{opt.count}</span>
                       </label>
                     ))}
                   </div>
@@ -831,8 +831,8 @@ export function CategoryCatalog({
                 {/* Price Bracket */}
                 <div className="pt-3 border-t border-line/60">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="mono-spec text-[11px] text-ink font-semibold">MAX PRICE</span>
-                    <span className="font-mono text-[12px] font-bold text-ink">{inr(maxPrice)}</span>
+                    <span className="text-[13px] text-ink font-semibold">Max Price</span>
+                    <span className="text-[13px] font-semibold text-ink">{inr(maxPrice)}</span>
                   </div>
                   <input
                     type="range"
