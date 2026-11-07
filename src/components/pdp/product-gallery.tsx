@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { Compass, Sparkles, CheckCircle2, ShieldCheck, ZoomIn, RotateCcw } from "lucide-react";
+import { Compass, ZoomIn, RotateCcw } from "lucide-react";
 import { Part } from "@/lib/data";
 
 export function ProductGallery({ part }: { part: Part }) {
@@ -34,14 +34,8 @@ export function ProductGallery({ part }: { part: Part }) {
 
   return (
     <div className="flex flex-col gap-3">
-      {/* Top Banner Badges */}
-      <div className="flex items-center justify-between gap-2 text-[12px]">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-stock/10 border border-stock/20 px-3 py-1 font-medium text-stock">
-          <span className="size-2 rounded-full bg-stock" />
-          <span>Genuine OEM Sealed</span>
-          <span className="text-mute text-[11px]">· {part.batch}</span>
-        </div>
-
+      {/* 360 View Mode Action */}
+      <div className="flex items-center justify-end">
         <button
           onClick={() => {
             setIs360Mode(!is360Mode);
@@ -124,18 +118,6 @@ export function ProductGallery({ part }: { part: Part }) {
             </span>
           </button>
         ))}
-      </div>
-
-      {/* Sub-bar Quality Assurance Badges */}
-      <div className="grid grid-cols-2 gap-2 pt-1 font-mono text-[11px] text-mute">
-        <div className="flex items-center gap-2 rounded-control border border-line/80 bg-well/40 p-2.5">
-          <CheckCircle2 className="size-3.5 text-stock shrink-0" />
-          <span className="truncate">J-Platform Calibrated (±0.02mm)</span>
-        </div>
-        <div className="flex items-center gap-2 rounded-control border border-line/80 bg-well/40 p-2.5">
-          <ShieldCheck className="size-3.5 text-heritage shrink-0" />
-          <span className="truncate">Direct Dispatch (Hologram Sealed)</span>
-        </div>
       </div>
     </div>
   );

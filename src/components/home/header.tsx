@@ -2,9 +2,9 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, ShoppingBag, User, MapPin, ScanLine, Truck, ArrowRight, X, Bike, ChevronDown } from "lucide-react";
+import { Search, ShoppingBag, User, MapPin, ScanLine, Truck, ArrowRight, X, Bike, ChevronDown, House, ChevronRight } from "lucide-react";
 import { useCart } from "@/components/cart";
-import { parts, inr } from "@/lib/data";
+import { parts, inr, bikes } from "@/lib/data";
 import { BikeModelSwitchModal } from "@/components/bike/bike-model-switch-modal";
 
 interface NavItem {
@@ -48,13 +48,53 @@ export function Header() {
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [isBikeModalOpen, setIsBikeModalOpen] = useState(false);
+  const [activeBikeSlug, setActiveBikeSlug] = useState("classic-350");
   const [mobileCollapsed, setMobileCollapsed] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Sync active bike across routes and events
+  useEffect(() => {
+    const syncBike = () => {
+      const match = pathname?.match(/\/bikes\/([^/?#]+)/);
+      if (match && match[1]) {
+        setActiveBikeSlug(match[1]);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("royalspares_active_bike", match[1]);
+        }
+        return;
+      }
+      if (typeof window !== "undefined") {
+        const saved = localStorage.getItem("royalspares_active_bike");
+        if (saved) {
+          setActiveBikeSlug(saved);
+        }
+      }
+    };
+    syncBike();
+    window.addEventListener("storage", syncBike);
+    window.addEventListener("bike-change", syncBike as EventListener);
+    return () => {
+      window.removeEventListener("storage", syncBike);
+      window.removeEventListener("bike-change", syncBike as EventListener);
+    };
+  }, [pathname]);
+
+  const activeBike = bikes.find((b) => b.slug === activeBikeSlug);
+
+  const activeNavItems = navItems.map((item) =>
+    item.prefix === "/bikes" ? { ...item, href: `/bikes/${activeBikeSlug}` } : item
+  );
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   /* Collapse mobile extras (delivery strip + chips) on scroll-down, reveal on scroll-up */
   useEffect(() => {
@@ -169,7 +209,7 @@ export function Header() {
             className="hidden sm:flex items-center gap-1.5 rounded-control border border-line bg-well px-3 py-1.5 text-[12px] font-medium text-ink hover:border-ink cursor-pointer"
           >
             <Bike className="size-3.5 text-heritage" />
-            <span>Select Bike</span>
+            <span>{activeBike?.name || "Select Bike"}</span>
             <ChevronDown className="size-3 text-mute" />
           </button>
 
@@ -195,13 +235,38 @@ export function Header() {
           <Link href="/account" aria-label="Account" className="grid size-8 place-items-center rounded-full bg-ink text-[11px] font-medium text-white lg:hidden">
             RS
           </Link>
+
+          {/* Apple-style Mobile Menu Hamburger Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="grid size-9 place-items-center text-ink md:hidden cursor-pointer rounded-lg hover:bg-well transition-colors"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            <div className="w-4 h-3.5 flex flex-col justify-between">
+              <span
+                className={`h-0.5 w-full bg-ink rounded-full transition-all duration-300 ${
+                  isMobileMenuOpen ? "rotate-45 translate-y-[6px]" : ""
+                }`}
+              />
+              <span
+                className={`h-0.5 w-full bg-ink rounded-full transition-all duration-300 ${
+                  isMobileMenuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`h-0.5 w-full bg-ink rounded-full transition-all duration-300 ${
+                  isMobileMenuOpen ? "-rotate-45 -translate-y-[6px]" : ""
+                }`}
+              />
+            </div>
+          </button>
         </div>
       </div>
 
       {/* Desktop/tablet nav */}
       <nav aria-label="Primary" className="hidden border-t border-line/60 md:block">
         <div className="shell flex h-11 items-center gap-6 overflow-x-auto no-scrollbar text-[13px]">
-          {navItems.map((item) => {
+          {activeNavItems.map((item) => {
             const isActive =
               mounted && item.prefix && item.prefix !== "/#finder"
                 ? pathname?.startsWith(item.prefix)
@@ -300,30 +365,98 @@ export function Header() {
           </div>
         </div>
       </div>
+
+      {/* Apple-style Mobile Dropdown Menu */}
+      <div
+        className={`fixed inset-x-0 top-14 bottom-0 z-50 bg-canvas/95 backdrop-blur-2xl transition-all duration-300 md:hidden flex flex-col justify-between p-6 overflow-y-auto ${
+          isMobileMenuOpen
+            ? "opacity-100 pointer-events-auto translate-y-0"
+            : "opacity-0 pointer-events-none -translate-y-4"
+        }`}
+      >
+        <div className="space-y-6 pt-2">
+          <nav className="flex flex-col space-y-3 text-[17px] font-semibold text-ink">
+            <Link
+              href="/"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between py-3 border-b border-line/60"
+            >
+              <span className="flex items-center gap-3">
+                <House className="size-5 text-heritage" /> Home
+              </span>
+              <ChevronRight className="size-4 text-mute" />
+            </Link>
+            <Link
+              href={`/bikes/${activeBikeSlug}`}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between py-3 border-b border-line/60"
+            >
+              <span className="flex items-center gap-3">
+                <Bike className="size-5 text-heritage" /> {activeBike?.name || "Bikes & Models"}
+              </span>
+              <ChevronRight className="size-4 text-mute" />
+            </Link>
+            <Link
+              href="/categories/brakes-hydraulics"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between py-3 border-b border-line/60"
+            >
+              <span className="flex items-center gap-3">
+                <Search className="size-5 text-heritage" /> Search Parts
+              </span>
+              <ChevronRight className="size-4 text-mute" />
+            </Link>
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsOpen(true);
+              }}
+              className="flex items-center justify-between py-3 border-b border-line/60 w-full text-left cursor-pointer"
+            >
+              <span className="flex items-center gap-3">
+                <ShoppingBag className="size-5 text-heritage" /> Shopping Bag
+              </span>
+              <div className="flex items-center gap-2">
+                {count > 0 && (
+                  <span className="rounded-full bg-heritage text-white px-2 py-0.5 text-xs font-bold">
+                    {count}
+                  </span>
+                )}
+                <ChevronRight className="size-4 text-mute" />
+              </div>
+            </button>
+            <Link
+              href="/account"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between py-3 border-b border-line/60"
+            >
+              <span className="flex items-center gap-3">
+                <User className="size-5 text-heritage" /> Account &amp; Garage
+              </span>
+              <ChevronRight className="size-4 text-mute" />
+            </Link>
+          </nav>
+        </div>
+
+        <div className="border-t border-line pt-4 text-xs text-mute flex items-center justify-between">
+          <span>Royal Enfield Genuine OEM Spares</span>
+          <Link href="/help" onClick={() => setIsMobileMenuOpen(false)} className="underline text-ink">
+            Help Center
+          </Link>
+        </div>
+      </div>
     </header>
 
       {/* Bike Model Switch Modal — rendered outside header to escape its stacking context */}
       <BikeModelSwitchModal
         isOpen={isBikeModalOpen}
         onClose={() => setIsBikeModalOpen(false)}
-        currentSlug="classic-350"
+        currentSlug={activeBikeSlug}
       />
     </>
   );
 }
 
 export function TrustStrip() {
-  return (
-    <div className="hidden border-b border-line bg-canvas md:block">
-      <div className="shell flex h-9 items-center gap-x-4 overflow-hidden whitespace-nowrap text-[12px] text-mute">
-        <span>Direct warehouse inventory</span>
-        <span className="text-line">·</span>
-        <span>Royal Enfield genuine spares</span>
-        <span className="text-line">·</span>
-        <span>Guaranteed fitment</span>
-        <span className="text-line">·</span>
-        <span>Dispatched within 24 hours</span>
-      </div>
-    </div>
-  );
+  return null;
 }

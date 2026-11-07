@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -39,9 +39,12 @@ type Ctx = {
   add: (p: Omit<CartLine, "qty">, qty?: number) => void;
   remove: (id: string) => void;
   updateQty: (id: string, qty: number) => void;
+  clearCart: () => void;
 };
 
 const CartCtx = createContext<Ctx | null>(null);
+
+const STORAGE_KEY = "royalspares_cart_v1";
 
 const defaultInitialLines: CartLine[] = [
   {
@@ -66,15 +69,79 @@ const defaultInitialLines: CartLine[] = [
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>(defaultInitialLines);
-  const [last, setLast] = useState<CartLine | null>(null);
+  const [last, setLast] = useState<CartLine | null>(defaultInitialLines[0] || null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Hydrate cart from localStorage on client mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored !== null) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          setLines(parsed);
+          if (parsed.length > 0) {
+            setLast(parsed[parsed.length - 1]);
+          } else {
+            setLast(null);
+          }
+        }
+      } else {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultInitialLines));
+      }
+    } catch (e) {
+      console.error("Cart hydration failed:", e);
+    }
+    setIsHydrated(true);
+  }, []);
+
+  // Persist cart to localStorage whenever lines change after initial hydration
+  useEffect(() => {
+    if (!isHydrated) return;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
+    } catch (e) {
+      console.error("Failed to persist cart:", e);
+    }
+  }, [lines, isHydrated]);
+
+  // Synchronize cart across multiple open tabs/windows
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === STORAGE_KEY && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          if (Array.isArray(parsed)) {
+            setLines(parsed);
+            if (parsed.length > 0) {
+              setLast(parsed[parsed.length - 1]);
+            } else {
+              setLast(null);
+            }
+          }
+        } catch {
+          // ignore parsing error from other tabs
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   const add = useCallback((p: Omit<CartLine, "qty">, qty: number = 1) => {
+    const safeQty = typeof qty === "number" && !isNaN(qty) && qty > 0 ? qty : 1;
     setLines((prev) => {
       const hit = prev.find((l) => l.id === p.id);
-      const next = hit
-        ? prev.map((l) => (l.id === p.id ? { ...l, qty: l.qty + qty } : l))
-        : [...prev, { ...p, qty }];
+      let next: CartLine[];
+      if (hit) {
+        next = prev.map((l) =>
+          l.id === p.id ? { ...l, qty: l.qty + safeQty } : l
+        );
+      } else {
+        next = [...prev, { ...p, qty: safeQty }];
+      }
       const item = next.find((l) => l.id === p.id) ?? null;
       setLast(item);
       return next;
@@ -83,15 +150,27 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const remove = useCallback((id: string) => {
-    setLines((prev) => prev.filter((l) => l.id !== id));
+    setLines((prev) => {
+      const next = prev.filter((l) => l.id !== id);
+      setLast((curr) => (curr?.id === id ? next[next.length - 1] ?? null : curr));
+      return next;
+    });
   }, []);
 
   const updateQty = useCallback((id: string, qty: number) => {
-    if (qty <= 0) {
-      setLines((prev) => prev.filter((l) => l.id !== id));
-    } else {
-      setLines((prev) => prev.map((l) => (l.id === id ? { ...l, qty } : l)));
-    }
+    setLines((prev) => {
+      if (qty <= 0) {
+        const next = prev.filter((l) => l.id !== id);
+        setLast((curr) => (curr?.id === id ? next[next.length - 1] ?? null : curr));
+        return next;
+      }
+      return prev.map((l) => (l.id === id ? { ...l, qty } : l));
+    });
+  }, []);
+
+  const clearCart = useCallback(() => {
+    setLines([]);
+    setLast(null);
   }, []);
 
   const subtotal = useMemo(() => lines.reduce((s, l) => s + l.price * l.qty, 0), [lines]);
@@ -108,8 +187,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       add,
       remove,
       updateQty,
+      clearCart,
     }),
-    [lines, count, subtotal, last, isOpen, add, remove, updateQty]
+    [lines, count, subtotal, last, isOpen, add, remove, updateQty, clearCart]
   );
 
   return (

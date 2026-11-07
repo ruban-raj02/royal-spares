@@ -118,9 +118,9 @@ export function GarageBikeModal({
                     onSelectBike(b.name, b.isMatch, b.matchReason);
                     onClose();
                   }}
-                  className={`cursor-pointer rounded-card border p-3.5 transition-all ${
+                  className={`cursor-pointer rounded-card border p-3.5 transition-colors ${
                     isSelected
-                      ? "border-heritage bg-heritage/5 ring-1 ring-heritage"
+                      ? "border-line bg-heritage/5"
                       : "border-line bg-canvas hover:border-ink"
                   }`}
                 >

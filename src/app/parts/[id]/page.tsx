@@ -7,11 +7,11 @@ import { Header, TrustStrip } from "@/components/home/header";
 import { Footer, BottomNav } from "@/components/home/footer-and-bars";
 import { ProductGallery } from "@/components/pdp/product-gallery";
 import { ProductBuyBox } from "@/components/pdp/product-buy-box";
-import { MicroficheSchematic } from "@/components/pdp/microfiche-schematic";
 import { CompatibilityMatrix } from "@/components/pdp/compatibility-matrix";
 import { TechSpecsAndContents } from "@/components/pdp/tech-specs-and-contents";
 import { FrequentlyBoughtTogether } from "@/components/pdp/frequently-bought-together";
 import { WorkshopReviews } from "@/components/pdp/workshop-reviews";
+import { SuggestedProducts } from "@/components/pdp/suggested-products";
 import { StickyBottomBar } from "@/components/pdp/sticky-bottom-bar";
 
 export async function generateMetadata({
@@ -96,20 +96,20 @@ export default async function PartDetailPage({
           </div>
         </div>
 
-        {/* Section 1: Exploded Microfiche CAD & Torque Standards */}
-        <MicroficheSchematic part={part} />
-
-        {/* Section 2: Verified Vehicle Compatibility Matrix */}
+        {/* Section 1: Verified Vehicle Compatibility Matrix */}
         <CompatibilityMatrix part={part} />
 
-        {/* Section 3: Detailed Technical Specs & Inside Factory Package */}
+        {/* Section 2: How to Use & Inside Factory Package */}
         <TechSpecsAndContents part={part} />
 
-        {/* Section 4: Frequently Bought Together Bundle */}
+        {/* Section 3: Frequently Bought Together Bundle */}
         <FrequentlyBoughtTogether part={part} />
 
-        {/* Section 5: Verified Workshop Reviews & Manual Download */}
+        {/* Section 4: Verified Workshop Reviews */}
         <WorkshopReviews part={part} />
+
+        {/* Section 5: Suggested Products */}
+        <SuggestedProducts currentPart={part} />
       </main>
 
       <Footer />

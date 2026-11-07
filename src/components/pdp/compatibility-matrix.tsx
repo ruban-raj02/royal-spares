@@ -1,9 +1,16 @@
 "use client";
-import { CheckCircle2, AlertTriangle, ShieldCheck, XCircle } from "lucide-react";
+import { CheckCircle2, ShieldCheck, Bike } from "lucide-react";
 import { Part } from "@/lib/data";
 
 export function CompatibilityMatrix({ part }: { part: Part }) {
   const { compatibility } = part;
+
+  // Only list the motorcycle models of guaranteed direct fit
+  const guaranteedBikes = compatibility.filter((item) => item.status === "direct-fit");
+  const displayBikes =
+    guaranteedBikes.length > 0
+      ? guaranteedBikes
+      : compatibility.filter((item) => item.status !== "incompatible");
 
   return (
     <section className="mt-8 rounded-panel border border-line bg-canvas p-4 md:p-8">
@@ -11,82 +18,42 @@ export function CompatibilityMatrix({ part }: { part: Part }) {
       <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between border-b border-line pb-4">
         <div>
           <h2 className="text-[20px] md:text-[24px] font-bold tracking-tight text-ink">
-            Verified Vehicle Compatibility Matrix
+            Verified Vehicle Compatibility
           </h2>
           <p className="text-[13px] text-mute mt-1">
-            Tested and calibrated for chassis dimensions to ensure exact factory fitment with your motorcycle registration year.
+            Guaranteed 100% factory direct fit for the following motorcycle models.
           </p>
         </div>
 
         <div className="inline-flex items-center gap-1.5 text-[12px] font-medium text-stock self-start md:self-auto">
           <ShieldCheck className="size-3.5" />
-          <span>Factory OEM Certified</span>
+          <span>Guaranteed Fitment</span>
         </div>
       </div>
 
-      {/* Table Container */}
-      <div className="mt-5 overflow-x-auto no-scrollbar">
-        <table className="w-full min-w-[620px] text-left border-collapse">
-          <thead>
-            <tr className="border-b border-line text-[12px] font-semibold text-mute">
-              <th className="py-3 px-3">Model Family</th>
-              <th className="py-3 px-3">Production Years</th>
-              <th className="py-3 px-3">Engine Version</th>
-              <th className="py-3 px-3">Ratio / Spec Check</th>
-              <th className="py-3 px-3 text-right">Fitment Status</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-line/60 text-[13px]">
-            {compatibility.map((item, idx) => {
-              const isDirect = item.status === "direct-fit";
-              const isCompat = item.status === "compatible";
-              const isIncompat = item.status === "incompatible";
+      {/* Guaranteed Fit Bikes List */}
+      <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {displayBikes.map((item, idx) => (
+          <div
+            key={idx}
+            className="flex items-center justify-between gap-3 p-3.5 rounded-control border border-line/80 bg-well/30"
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="size-8 rounded-md bg-canvas border border-line grid place-items-center shrink-0 text-heritage">
+                <Bike className="size-4" />
+              </div>
+              <div className="min-w-0">
+                <h4 className="text-[13.5px] font-semibold text-ink truncate">{item.model}</h4>
+                <p className="text-[11.5px] text-mute">{item.years}</p>
+              </div>
+            </div>
 
-              return (
-                <tr
-                  key={idx}
-                  className={`transition-colors hover:bg-well/40 ${
-                    isDirect ? "font-medium" : ""
-                  }`}
-                >
-                  <td className="py-3.5 px-3">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`size-2 rounded-full ${
-                          isDirect ? "bg-stock" : isCompat ? "bg-link" : "bg-danger"
-                        }`}
-                      />
-                      <span className="text-ink">{item.model}</span>
-                    </div>
-                  </td>
-                  <td className="py-3.5 px-3 text-[12px] text-mute">{item.years}</td>
-                  <td className="py-3.5 px-3 text-mute">{item.engine}</td>
-                  <td className="py-3.5 px-3 text-[12px] text-ink/90">{item.ratio}</td>
-                  <td className="py-3.5 px-3 text-right">
-                    {isDirect && (
-                      <span className="inline-flex items-center gap-1 rounded bg-stock/15 px-2.5 py-1 text-[11px] font-medium text-stock">
-                        <CheckCircle2 className="size-3" />
-                        <span>{item.badge}</span>
-                      </span>
-                    )}
-                    {isCompat && (
-                      <span className="inline-flex items-center gap-1 rounded bg-link/15 px-2.5 py-1 text-[11px] font-medium text-link">
-                        <CheckCircle2 className="size-3" />
-                        <span>{item.badge}</span>
-                      </span>
-                    )}
-                    {isIncompat && (
-                      <span className="inline-flex items-center gap-1 rounded bg-danger/10 px-2.5 py-1 text-[11px] font-medium text-danger">
-                        <XCircle className="size-3" />
-                        <span>{item.badge}</span>
-                      </span>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+            <span className="inline-flex items-center gap-1 shrink-0 rounded bg-stock/15 px-2 py-0.5 text-[11px] font-semibold text-stock">
+              <CheckCircle2 className="size-3" />
+              <span>Guaranteed</span>
+            </span>
+          </div>
+        ))}
       </div>
     </section>
   );

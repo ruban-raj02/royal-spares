@@ -163,38 +163,8 @@ export function CartPageContent() {
       </div>
 
       <div className="shell pt-5 md:pt-7">
-        {/* GARAGE BIKE MATCHED BANNER */}
-        <div className="rounded-card border border-heritage/30 bg-heritage/5 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="size-9 rounded-control bg-heritage text-white flex items-center justify-center shrink-0">
-              <Bike className="size-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-[12px] font-semibold text-heritage">
-                  Matched to your motorcycle
-                </span>
-                <span className="rounded bg-stock/15 px-1.5 py-0.2 text-[10px] font-semibold text-stock">
-                  2 bikes saved
-                </span>
-              </div>
-              <p className="text-[12px] text-mute mt-0.5">
-                Catalog matched to: <strong className="text-ink font-semibold">Classic 350 Reborn (KA-01-MJ-4520)</strong> &amp; Sherpa 450 Platform
-              </p>
-            </div>
-          </div>
-
-          <button
-            onClick={() => setIsBikeModalOpen(true)}
-            className="btn-secondary h-8 px-3 text-[12px] gap-1.5 self-start sm:self-auto cursor-pointer"
-          >
-            <RefreshCw className="size-3.5" />
-            <span>Switch Active Bike</span>
-          </button>
-        </div>
-
         {/* SHOPPING BAG PAGE TITLE & PROMO STRIP */}
-        <div className="mt-6 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-line pb-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-line pb-4">
           <div>
             <div className="flex items-center gap-2.5">
               <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-ink">Shopping Bag</h1>

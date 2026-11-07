@@ -1,5 +1,7 @@
 "use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { X, Check, Bike, ChevronRight } from "lucide-react";
 import { bikes } from "@/lib/data";
 
@@ -10,9 +12,46 @@ export function BikeModelSwitchModal({
 }: {
   isOpen: boolean;
   onClose: () => void;
-  currentSlug: string;
+  currentSlug?: string;
 }) {
+  const pathname = usePathname();
+  const [activeSlug, setActiveSlug] = useState<string>(currentSlug || "classic-350");
+
+  useEffect(() => {
+    // 1. Try URL path (e.g. /bikes/hunter-350)
+    const match = pathname?.match(/\/bikes\/([^/?#]+)/);
+    if (match && match[1]) {
+      setActiveSlug(match[1]);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("royalspares_active_bike", match[1]);
+      }
+      return;
+    }
+    // 2. Try currentSlug prop
+    if (currentSlug) {
+      setActiveSlug(currentSlug);
+      return;
+    }
+    // 3. Try localStorage
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("royalspares_active_bike");
+      if (saved) {
+        setActiveSlug(saved);
+      }
+    }
+  }, [isOpen, pathname, currentSlug]);
+
   if (!isOpen) return null;
+
+  const handleSelectBike = (slug: string) => {
+    setActiveSlug(slug);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("royalspares_active_bike", slug);
+      window.dispatchEvent(new Event("storage"));
+      window.dispatchEvent(new CustomEvent("bike-change", { detail: slug }));
+    }
+    onClose();
+  };
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
@@ -43,15 +82,15 @@ export function BikeModelSwitchModal({
           {/* List of Models */}
           <div className="mt-4 space-y-2.5 max-h-[60vh] overflow-y-auto pr-1">
             {bikes.map((b) => {
-              const isSelected = currentSlug === b.slug;
+              const isSelected = activeSlug === b.slug;
               return (
                 <Link
                   key={b.slug}
                   href={`/bikes/${b.slug}`}
-                  onClick={onClose}
-                  className={`flex items-center justify-between rounded-card border p-3 transition-all ${
+                  onClick={() => handleSelectBike(b.slug)}
+                  className={`flex items-center justify-between rounded-card border p-3 transition-colors ${
                     isSelected
-                      ? "border-heritage bg-heritage/5 ring-1 ring-heritage"
+                      ? "border-line bg-heritage/5"
                       : "border-line bg-canvas hover:border-ink"
                   }`}
                 >
@@ -64,14 +103,14 @@ export function BikeModelSwitchModal({
                       <h4 className="text-[14px] font-semibold text-ink flex items-center gap-2">
                         {b.name}
                         {isSelected && (
-                          <span className="rounded bg-heritage text-white px-1.5 py-0.2 text-[9px] font-mono">
+                          <span className="rounded bg-heritage text-white px-1.5 py-0.2 text-[9px] font-semibold">
                             ACTIVE
                           </span>
                         )}
                       </h4>
                       <p className="text-[12px] text-mute truncate">{b.sub}</p>
-                      <p className="font-mono text-[11px] text-mute/80 mt-0.5">
-                        {b.engine} · {b.years} · {b.schematics} schematics
+                      <p className="text-[11px] text-mute/80 mt-0.5">
+                        {b.engine}
                       </p>
                     </div>
                   </div>

@@ -1,9 +1,9 @@
 "use client";
-import { Star, ShieldCheck, Wrench, Download, ArrowRight, UserCheck } from "lucide-react";
+import { Star, UserCheck } from "lucide-react";
 import { Part } from "@/lib/data";
 
 export function WorkshopReviews({ part }: { part: Part }) {
-  const { reviews, manual } = part;
+  const { reviews } = part;
 
   return (
     <section className="mt-8 space-y-6">
@@ -98,29 +98,6 @@ export function WorkshopReviews({ part }: { part: Part }) {
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Workshop Manual Section Download Banner */}
-      <div className="rounded-panel border border-line bg-canvas p-4 md:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-3.5">
-          <div className="size-11 rounded-control bg-well grid place-items-center shrink-0 border border-line">
-            <Wrench className="size-5 text-heritage" />
-          </div>
-          <div>
-            <h4 className="text-[14px] font-semibold text-ink">{manual.title}</h4>
-            <p className="text-[12px] text-mute">{manual.desc}</p>
-          </div>
-        </div>
-
-        <button
-          onClick={() => {
-            alert(`Opening schematic: ${manual.file} (${manual.size})`);
-          }}
-          className="btn-secondary h-10 px-4 text-[13px] shrink-0 font-medium flex items-center gap-2 w-full sm:w-auto justify-center"
-        >
-          <span>PDF Schematic</span>
-          <ArrowRight className="size-3.5" />
-        </button>
       </div>
     </section>
   );

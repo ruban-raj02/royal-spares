@@ -206,28 +206,16 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
             </span>
 
             {/* Desktop Active Filter Chips */}
-            <div className="hidden lg:flex items-center gap-2">
-              <span className="rounded-full bg-well border border-line px-2.5 py-0.5 font-mono text-[11px] text-mute flex items-center gap-1">
-                {bike.platformTag}
-                <Check className="size-3 text-stock" />
-              </span>
-              {isReadyDispatchOnly && (
-                <span className="rounded-full bg-stock/10 border border-stock/20 px-2.5 py-0.5 font-mono text-[11px] text-stock flex items-center gap-1">
-                  Depot Stock
-                  <button onClick={() => setIsReadyDispatchOnly(false)} className="hover:text-ink">
-                    <X className="size-3" />
-                  </button>
-                </span>
-              )}
-              {(isReadyDispatchOnly || selectedBrands.length > 0) && (
+            {selectedAssembly !== "all" && (
+              <div className="hidden lg:flex items-center gap-2">
                 <button
                   onClick={resetFilters}
                   className="text-[11px] text-link hover:underline ml-1 cursor-pointer"
                 >
                   Clear Filters
                 </button>
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           {/* Right: View Mode Toggle & Sort Dropdown */}
@@ -291,50 +279,8 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
             </button>
           </div>
 
-          {/* Trim Edition Filter */}
-          <div className="space-y-2.5">
-            <h4 className="text-[12px] text-ink font-semibold">
-              Trim Edition ({bike.platformTag})
-            </h4>
-            <div className="space-y-1.5 text-[13px]">
-              {trimOptions.map((opt) => (
-                <label
-                  key={opt.name}
-                  className="flex items-center justify-between text-mute hover:text-ink cursor-pointer select-none py-0.5"
-                >
-                  <div className="flex items-center gap-2 min-w-0">
-                    <input
-                      type="checkbox"
-                      checked={selectedTrims.includes(opt.name)}
-                      onChange={() => handleToggleTrim(opt.name)}
-                      className="size-4 accent-heritage rounded cursor-pointer"
-                    />
-                    <span className="truncate">{opt.name}</span>
-                  </div>
-                  <span className="text-[12px] text-mute/80 pl-2">{opt.count}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Ready to Dispatch Filter */}
-          <div className="pt-3 border-t border-line/70">
-            <label className="flex items-start gap-2.5 cursor-pointer select-none">
-              <input
-                type="checkbox"
-                checked={isReadyDispatchOnly}
-                onChange={(e) => setIsReadyDispatchOnly(e.target.checked)}
-                className="mt-0.5 size-4 accent-heritage rounded cursor-pointer"
-              />
-              <div>
-                <span className="text-[13px] font-medium text-ink block">Ready to Dispatch</span>
-                <span className="text-[11px] text-mute block">Bangalore Depot Only</span>
-              </div>
-            </label>
-          </div>
-
           {/* Major Assembly Filter */}
-          <div className="pt-3 border-t border-line/70 space-y-2.5">
+          <div className="space-y-2.5">
             <h4 className="text-[12px] text-ink font-semibold">Major Assembly</h4>
             <div className="space-y-1.5 text-[13px]">
               {bike.assemblies
@@ -356,27 +302,6 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                     <span className="text-[12px] text-mute/80">{asm.count}</span>
                   </label>
                 ))}
-            </div>
-          </div>
-
-          {/* Top-1 OEM Brand Filter */}
-          <div className="pt-3 border-t border-line/70 space-y-2.5">
-            <h4 className="text-[12px] text-ink font-semibold">OEM Brand</h4>
-            <div className="space-y-1.5 text-[13px]">
-              {brandOptions.map((brand) => (
-                <label
-                  key={brand}
-                  className="flex items-center gap-2 text-mute hover:text-ink cursor-pointer select-none py-0.5"
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedBrands.includes(brand)}
-                    onChange={() => handleToggleBrand(brand)}
-                    className="size-4 accent-heritage rounded cursor-pointer"
-                  />
-                  <span className="truncate">{brand}</span>
-                </label>
-              ))}
             </div>
           </div>
 
@@ -432,25 +357,14 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                     className="card card-hover flex flex-col justify-between p-4 bg-canvas group transition-all"
                   >
                     <div>
-                      {/* Top Bar: OEM Ref + Badge */}
-                      <div className="flex items-center justify-between gap-1 text-[11px] font-mono">
+                      {/* Top Bar: OEM Ref */}
+                      <div className="text-[11px]">
                         <Link
                           href={`/parts/${item.partId}`}
                           className="text-mute group-hover:text-ink font-semibold truncate hover:underline"
                         >
-                          REF # {item.oem}
+                          OEM # {item.oem}
                         </Link>
-                        <span
-                          className={`rounded px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider ${
-                            item.tagType === "sealed"
-                              ? "bg-stock/15 text-stock"
-                              : item.tagType === "low-stock"
-                              ? "bg-danger/15 text-danger"
-                              : "bg-well text-mute border border-line"
-                          }`}
-                        >
-                          {item.tag}
-                        </span>
                       </div>
 
                       {/* Product Image Stage */}
@@ -464,9 +378,6 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                           alt={item.name}
                           className="h-full w-full object-contain filter drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
                         />
-                        <span className="absolute bottom-2 left-2 rounded bg-ink/75 px-1.5 py-0.5 text-[10px] text-white backdrop-blur">
-                          {item.specLabel}
-                        </span>
                       </Link>
 
                       {/* Title & Description */}
@@ -480,22 +391,23 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                       </p>
 
                       {/* Fitment Status */}
-                      <div className="mt-2.5 flex items-center gap-1.5 text-[11px] text-stock font-medium">
-                        <Check className="size-3.5 text-stock shrink-0" />
-                        <span className="truncate">{item.fitmentLabel}</span>
+                      <div className="mt-2.5 text-[11px] text-stock font-medium">
+                        <span className="truncate">100% compatible for {bike.name}</span>
                       </div>
                     </div>
 
                     {/* Pricing & Add to Bag */}
                     <div className="mt-4 pt-3 border-t border-line/70">
-                      <div className="flex items-baseline justify-between">
-                        <div>
-                          <span className="text-[18px] font-bold text-ink">{inr(item.price)}</span>
-                          <span className="ml-2 text-[13px] text-mute line-through">
-                            {inr(item.mrp)}
+                      <div className="flex items-baseline flex-wrap gap-2">
+                        <span className="text-[18px] font-bold text-ink">{inr(item.price)}</span>
+                        <span className="text-[13px] text-mute line-through">
+                          {inr(item.mrp)}
+                        </span>
+                        {item.mrp > item.price && (
+                          <span className="text-[12px] font-semibold text-stock">
+                            save {item.discountPct}% upto {inr(item.mrp - item.price)}
                           </span>
-                        </div>
-                        <span className="text-[12px] text-mute">{item.stockText}</span>
+                        )}
                       </div>
 
                       <button
@@ -537,19 +449,16 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                           alt={item.name}
                           className="h-full w-full object-contain"
                         />
-                        <span className="absolute top-1 left-1 rounded bg-canvas border border-line px-1 py-0.2 text-[9px] font-bold text-mute">
-                          OEM
-                        </span>
                       </Link>
 
                       {/* Right Details */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-1">
-                          <span className="font-mono text-[10px] font-semibold text-mute truncate">
+                          <span className="text-[10px] font-semibold text-mute truncate">
                             OEM # {item.oem}
                           </span>
-                          <span className="inline-flex items-center gap-1 rounded bg-stock/15 px-1.5 py-0.2 text-[10px] font-bold text-stock uppercase">
-                            <span className="size-1.5 rounded-full bg-stock" /> Match
+                          <span className="text-[10px] font-semibold text-stock truncate">
+                            100% compatible for {bike.name}
                           </span>
                         </div>
 
@@ -559,16 +468,16 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                           </h4>
                         </Link>
 
-                        <p className="text-[11px] text-mute truncate mt-0.5">{item.specLabel}</p>
-
-                        <div className="mt-1 flex items-baseline gap-2">
+                        <div className="mt-1 flex flex-wrap items-baseline gap-2">
                           <span className="text-[15px] font-bold text-ink">{inr(item.price)}</span>
                           <span className="text-[12px] text-mute line-through">
                             {inr(item.mrp)}
                           </span>
-                          <span className="rounded bg-stock/10 px-1 py-0.2 text-[11px] font-semibold text-stock">
-                            {item.discountPct}% OFF
-                          </span>
+                          {item.mrp > item.price && (
+                            <span className="text-[11px] font-semibold text-stock">
+                              save {item.discountPct}% upto {inr(item.mrp - item.price)}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -578,9 +487,6 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
                       <div className="min-w-0">
                         <p className="flex items-center gap-1 text-[11px] text-stock font-medium">
                           <Zap className="size-3 text-stock fill-stock" /> Next Day Delivery
-                        </p>
-                        <p className="text-[11px] text-mute truncate mt-0.5">
-                          {item.stockDepot}
                         </p>
                       </div>
 
@@ -680,52 +586,29 @@ export function BikeCatalog({ bike }: { bike: BikeDetail }) {
               </div>
 
               <div className="flex-1 overflow-y-auto p-5 space-y-5">
+                {/* Major Assembly */}
                 <div>
-                  <h4 className="text-[13px] text-ink font-semibold mb-2">Trim Edition</h4>
+                  <h4 className="text-[13px] text-ink font-semibold mb-2">Major Assembly</h4>
                   <div className="space-y-2 text-[13px]">
-                    {trimOptions.map((opt) => (
-                      <label key={opt.name} className="flex items-center justify-between text-mute">
-                        <span className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={selectedTrims.includes(opt.name)}
-                            onChange={() => handleToggleTrim(opt.name)}
-                            className="size-4 accent-heritage rounded"
-                          />
-                          {opt.name}
-                        </span>
-                        <span className="text-[12px] text-mute/80">{opt.count}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pt-3 border-t border-line/60">
-                  <label className="flex items-center gap-2 text-[13px] font-medium text-ink">
-                    <input
-                      type="checkbox"
-                      checked={isReadyDispatchOnly}
-                      onChange={(e) => setIsReadyDispatchOnly(e.target.checked)}
-                      className="size-4 accent-heritage rounded"
-                    />
-                    Ready to Dispatch (Depot Only)
-                  </label>
-                </div>
-
-                <div className="pt-3 border-t border-line/60">
-                  <h4 className="text-[13px] text-ink font-semibold mb-2">OEM Brands</h4>
-                  <div className="space-y-2 text-[13px]">
-                    {brandOptions.map((brand) => (
-                      <label key={brand} className="flex items-center gap-2 text-mute">
-                        <input
-                          type="checkbox"
-                          checked={selectedBrands.includes(brand)}
-                          onChange={() => handleToggleBrand(brand)}
-                          className="size-4 accent-heritage rounded"
-                        />
-                        {brand}
-                      </label>
-                    ))}
+                    {bike.assemblies
+                      .filter((a) => a.id !== "all")
+                      .map((asm) => (
+                        <label
+                          key={asm.id}
+                          className="flex items-center justify-between text-mute"
+                        >
+                          <span className="flex items-center gap-2">
+                            <input
+                              type="checkbox"
+                              checked={selectedAssembly === asm.id}
+                              onChange={() => setSelectedAssembly(asm.id)}
+                              className="size-4 accent-heritage rounded"
+                            />
+                            {asm.name}
+                          </span>
+                          <span className="text-[12px] text-mute/80">{asm.count}</span>
+                        </label>
+                      ))}
                   </div>
                 </div>
 

@@ -95,7 +95,7 @@ export function ProductBuyBox({ part }: { part: Part }) {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Top Meta: OEM REF + Stock Badge */}
+      {/* Top Meta: OEM REF */}
       <div className="flex flex-wrap items-center justify-between gap-2">
         <button
           onClick={handleCopyOem}
@@ -106,13 +106,6 @@ export function ProductBuyBox({ part }: { part: Part }) {
           <span>{part.oem}</span>
           {copied ? <Check className="size-3 text-stock" /> : <Copy className="size-3 text-mute" />}
         </button>
-
-        <div className="inline-flex items-center gap-1.5 text-[12px] font-medium text-stock">
-          <span className="size-2 rounded-full bg-stock" />
-          <span>
-            {part.stockUnits} in stock ({part.stock})
-          </span>
-        </div>
       </div>
 
       {/* Product Title */}
