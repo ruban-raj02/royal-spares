@@ -61,11 +61,6 @@ export function ProductGallery({ part }: { part: Part }) {
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
       >
-        {/* OEM Authenticity Watermark */}
-        <div className="absolute top-4 left-4 font-mono text-[10px] tracking-widest text-mute/50 uppercase pointer-events-none">
-          REV: 2024-C · OEM SPEC
-        </div>
-
         {/* 360 indicator if active */}
         {is360Mode && (
           <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 rounded-full bg-ink/80 px-2.5 py-1 text-[11px] text-white backdrop-blur">

@@ -93,9 +93,9 @@ export function Categories() {
           return (
             <li key={c.slug}>
               <Link href={`/categories/${c.slug}`} className="card card-hover block h-full p-5">
-                <div className="flex items-start justify-between">
-                  <div><h3 className="text-[17px] font-semibold tracking-tight">{c.name}</h3><p className="text-[11px] text-mute">{c.parts} parts</p></div>
-                  <I className="size-4 text-mute" aria-hidden />
+                <div>
+                  <h3 className="text-[17px] font-semibold tracking-tight">{c.name}</h3>
+                  <p className="text-[11px] text-mute">{c.parts} parts</p>
                 </div>
                 <p className="mt-3 line-clamp-3 min-h-[66px] text-[13px] leading-[22px] text-mute">{c.blurb}</p>
                 <Photo src={c.img} alt={c.name} className="mt-4 aspect-[16/9] rounded-xl" />
@@ -116,33 +116,43 @@ export function PopularParts() {
       <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-4">
         {parts.map((p, i) => (
           <li key={p.id} className={i === 3 ? "md:hidden lg:list-item" : ""}>
-            <article className="card card-hover flex h-full flex-col p-3 lg:p-4 group">
-              <Link href={`/parts/${p.id}`} className="block overflow-hidden rounded-xl">
+            <div className="card card-hover flex h-full flex-col p-3 lg:p-4 group relative">
+              <div className="block overflow-hidden rounded-xl">
                 <Photo src={p.img} alt={p.name} className="aspect-square rounded-xl lg:aspect-[4/3] transition-transform duration-300 group-hover:scale-105" fit="contain" />
-              </Link>
-              <div className="mt-3 flex items-center justify-between gap-2">
-                <Link href={`/parts/${p.id}`} className="part-ref truncate hover:underline">#{p.oem}</Link>
-                <span className="chip-stock shrink-0 !px-1.5 !text-[10px]">{p.stockShort}</span>
               </div>
-              <Link href={`/parts/${p.id}`} className="block">
-                <h3 className="mt-2 text-[14px] font-medium leading-5 lg:text-[15px] hover:text-heritage transition-colors">{p.name}</h3>
-              </Link>
-              <p className="mt-1 text-[12px] text-mute">{p.fits}</p>
-              <p className="mt-1 hidden items-center gap-1.5 text-[11px] text-stock lg:flex"><span className="size-1.5 rounded-full bg-stock" />In stock ({p.stock})</p>
+              <div className="mt-3 flex items-center justify-between gap-2">
+                <span className="part-ref truncate">#{p.oem}</span>
+              </div>
+              <h3 className="mt-2 text-[14px] font-medium leading-5 lg:text-[15px] group-hover:text-heritage transition-colors">
+                {p.name}
+              </h3>
+              <p className="mt-1 text-[12px] text-mute">{p.fits.replace(/\s*\([^)]*\)/g, "")}</p>
               <div className="mt-auto flex items-end justify-between pt-3">
-                <p><span className="block text-lg font-semibold leading-6 tracking-tight">{inr(p.price)}</span><span className="text-[10px] text-mute">Incl. GST</span></p>
+                <p>
+                  <span className="block text-lg font-semibold leading-6 tracking-tight">{inr(p.price)}</span>
+                  <span className="text-[10px] text-mute">Incl. GST</span>
+                </p>
                 <button
                   onClick={(e) => {
                     e.preventDefault();
+                    e.stopPropagation();
                     add({ id: p.id, name: p.name, price: p.price, img: p.img, oem: p.oem });
                   }}
-                  className="btn-add cursor-pointer"
+                  className="btn-add cursor-pointer relative z-10"
                   aria-label={`Add ${p.name} to bag`}
                 >
-                  <Plus className="size-3.5 md:hidden lg:hidden" /><ShoppingBag className="hidden size-3.5 md:block lg:block" />Add
+                  <Plus className="size-3.5 md:hidden lg:hidden" />
+                  <ShoppingBag className="hidden size-3.5 md:block lg:block" />
+                  Add
                 </button>
               </div>
-            </article>
+              {/* Stretched link to make whole card clickable */}
+              <Link
+                href={`/parts/${p.id}`}
+                className="absolute inset-0 z-0"
+                aria-label={p.name}
+              />
+            </div>
           </li>
         ))}
       </ul>

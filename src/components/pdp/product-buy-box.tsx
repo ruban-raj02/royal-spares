@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import {
   Copy,
   Check,
@@ -11,12 +12,9 @@ import {
   MapPin,
   Truck,
   RotateCcw,
-  Sparkles,
-  AlertCircle,
 } from "lucide-react";
 import { Part, inr } from "@/lib/data";
 import { useCart } from "@/components/cart";
-import { GarageBikeModal } from "./garage-bike-modal";
 
 export function ProductBuyBox({ part }: { part: Part }) {
   const { add } = useCart();
@@ -35,12 +33,6 @@ export function ProductBuyBox({ part }: { part: Part }) {
     fast: true,
   });
   const [isCheckingPin, setIsCheckingPin] = useState(false);
-
-  // Garage bike state
-  const [isBikeModalOpen, setIsBikeModalOpen] = useState(false);
-  const [activeBike, setActiveBike] = useState(part.matchedBike.name);
-  const [isMatch, setIsMatch] = useState(true);
-  const [matchNotes, setMatchNotes] = useState(part.matchedBike.chassis);
 
   const handleCopyOem = () => {
     navigator.clipboard.writeText(part.oem);
@@ -117,43 +109,12 @@ export function ProductBuyBox({ part }: { part: Part }) {
         <p className="mt-2 text-[13px] leading-relaxed text-ink/80">{part.description}</p>
       </div>
 
-      {/* Guaranteed Fitment Card */}
-      <div
-        className={`rounded-card border p-3.5 transition-all ${
-          isMatch ? "border-stock/30 bg-stock/5" : "border-danger/30 bg-danger/5"
-        }`}
-      >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className={`size-4 ${isMatch ? "text-stock" : "text-danger"}`} />
-            <span className="text-[13px] font-semibold text-ink">
-              {isMatch ? "Guaranteed Fitment" : "Fitment Warning"}
-            </span>
-            <span className="text-mute text-[12px] hidden sm:inline">
-              · Pre-matched to garage bike
-            </span>
-          </div>
-          <button
-            onClick={() => setIsBikeModalOpen(true)}
-            className="text-[12px] font-medium text-link hover:underline underline-offset-2"
-          >
-            Change
-          </button>
-        </div>
-
-        <div className="mt-2.5 flex items-center justify-between rounded-control border border-line/60 bg-canvas p-2.5">
-          <div className="min-w-0 pr-2">
-            <p className="truncate text-[13px] font-medium text-ink">{activeBike}</p>
-            <p className="truncate text-[12px] text-mute mt-0.5">{matchNotes}</p>
-          </div>
-          <span
-            className={`shrink-0 rounded px-2 py-0.5 text-[11px] font-semibold ${
-              isMatch ? "bg-stock/15 text-stock" : "bg-danger/15 text-danger"
-            }`}
-          >
-            {isMatch ? "100% Match" : "No Match"}
-          </span>
-        </div>
+      {/* Guaranteed Fitment */}
+      <div className="flex items-center gap-2 rounded-card border border-stock/30 bg-stock/5 px-3.5 py-2.5">
+        <ShieldCheck className="size-4 text-stock shrink-0" />
+        <span className="text-[13px] font-medium text-ink">
+          {part.matchedBike.name} 100% Fit
+        </span>
       </div>
 
       {/* Pricing Section */}
@@ -169,6 +130,12 @@ export function ProductBuyBox({ part }: { part: Part }) {
           {part.taxNote}{" "}
           <span className="text-[12px] text-mute/80">(Incl. 18% GST: ₹{part.gstAmount})</span>
         </p>
+      </div>
+
+      {/* Non-cancellable & Non-refundable Notice */}
+      <div className="space-y-0.5 text-[12px]">
+        <p className="font-semibold text-danger">Non-cancellable &amp; Non-refundable</p>
+        <p className="text-mute">Please confirm part number/OEM before ordering.</p>
       </div>
 
       {/* Actions: Quantity + Add to Bag */}
@@ -235,6 +202,24 @@ export function ProductBuyBox({ part }: { part: Part }) {
         </button>
       </div>
 
+      {/* Verification & Policy Advisory Box */}
+      <div className="rounded-card border border-line bg-well/60 p-3.5 space-y-1.5 text-[12px]">
+        <p className="font-semibold text-ink">
+          Please verify before ordering below:
+        </p>
+        <p className="text-mute leading-relaxed">
+          Confirm the part number/OEM, model, compatibility before ordering, orders are subjected to our cancellation &amp; return policy. Please read below:
+        </p>
+        <div>
+          <Link
+            href="/guides"
+            className="font-medium text-heritage hover:underline inline-flex items-center gap-1"
+          >
+            Cancellation, Return &amp; Warranty Policy
+          </Link>
+        </div>
+      </div>
+
       {/* Pincode & Estimated Delivery Section */}
       <div className="rounded-card border border-line bg-well/50 p-3.5 space-y-2.5">
         <div className="flex items-center justify-between">
@@ -292,8 +277,8 @@ export function ProductBuyBox({ part }: { part: Part }) {
         </div>
         <div className="rounded-lg border border-line/70 bg-canvas p-2">
           <RotateCcw className="mx-auto size-4 text-heritage" />
-          <p className="text-[11px] font-semibold text-ink mt-1">10-Day Returns</p>
-          <p className="text-[10px] text-mute">Unopened Box SLA</p>
+          <p className="text-[11px] font-semibold text-ink mt-1">Warranty Cover</p>
+          <p className="text-[10px] text-mute">Transit Damage SLA</p>
         </div>
         <div className="rounded-lg border border-line/70 bg-canvas p-2">
           <Truck className="mx-auto size-4 text-heritage" />
@@ -301,18 +286,6 @@ export function ProductBuyBox({ part }: { part: Part }) {
           <p className="text-[10px] text-mute">BlueDart Aviation</p>
         </div>
       </div>
-
-      {/* Garage Bike Modal */}
-      <GarageBikeModal
-        isOpen={isBikeModalOpen}
-        onClose={() => setIsBikeModalOpen(false)}
-        currentBike={activeBike}
-        onSelectBike={(bikeName, match, notes) => {
-          setActiveBike(bikeName);
-          setIsMatch(match);
-          setMatchNotes(notes);
-        }}
-      />
     </div>
   );
 }

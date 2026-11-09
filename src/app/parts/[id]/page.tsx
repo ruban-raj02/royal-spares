@@ -12,7 +12,6 @@ import { TechSpecsAndContents } from "@/components/pdp/tech-specs-and-contents";
 import { FrequentlyBoughtTogether } from "@/components/pdp/frequently-bought-together";
 import { WorkshopReviews } from "@/components/pdp/workshop-reviews";
 import { SuggestedProducts } from "@/components/pdp/suggested-products";
-import { StickyBottomBar } from "@/components/pdp/sticky-bottom-bar";
 
 export async function generateMetadata({
   params,
@@ -113,7 +112,6 @@ export default async function PartDetailPage({
       </main>
 
       <Footer />
-      <StickyBottomBar part={part} />
       <BottomNav />
     </>
   );

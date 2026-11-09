@@ -36,8 +36,6 @@ export function Finder() {
               <p className="hidden text-[13px] text-mute md:block">Step-by-step verified fitment lookup</p>
             </div>
           </div>
-          <span className="chip-stock hidden md:inline-flex">Verified against official Royal Enfield parts microfiche</span>
-          <span className="chip-stock md:hidden">Microfiche verified</span>
         </div>
 
         <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.4fr_1fr_1fr_1fr_auto] lg:items-end">

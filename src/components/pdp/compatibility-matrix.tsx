@@ -31,26 +31,24 @@ export function CompatibilityMatrix({ part }: { part: Part }) {
         </div>
       </div>
 
-      {/* Guaranteed Fit Bikes List */}
-      <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {/* Guaranteed Fit Bikes - aesthetic list, no card inside card */}
+      <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2">
         {displayBikes.map((item, idx) => (
           <div
             key={idx}
-            className="flex items-center justify-between gap-3 p-3.5 rounded-control border border-line/80 bg-well/30"
+            className="flex items-center justify-between py-2.5 border-b border-line/60"
           >
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="size-8 rounded-md bg-canvas border border-line grid place-items-center shrink-0 text-heritage">
-                <Bike className="size-4" />
-              </div>
+              <Bike className="size-4 text-heritage shrink-0" />
               <div className="min-w-0">
-                <h4 className="text-[13.5px] font-semibold text-ink truncate">{item.model}</h4>
+                <h4 className="text-[13.5px] font-medium text-ink truncate">{item.model}</h4>
                 <p className="text-[11.5px] text-mute">{item.years}</p>
               </div>
             </div>
 
-            <span className="inline-flex items-center gap-1 shrink-0 rounded bg-stock/15 px-2 py-0.5 text-[11px] font-semibold text-stock">
-              <CheckCircle2 className="size-3" />
-              <span>Guaranteed</span>
+            <span className="inline-flex items-center gap-1 shrink-0 text-[11.5px] font-medium text-stock">
+              <CheckCircle2 className="size-3.5" />
+              <span>100% Fit</span>
             </span>
           </div>
         ))}
